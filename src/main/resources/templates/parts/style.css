@@ -1,0 +1,15 @@
+body {
+    color: #113;
+}
+.mx-auto{
+    width: 350px;
+}
+.card{
+    width: 25em;
+    margin:0 auto;
+    padding: 25px;
+}
+h4{
+    text-align: center;
+}
+

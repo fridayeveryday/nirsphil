@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>nirsfill</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body >
+<header th:insert="parts/navbar :: navbar"></header>
+    <div class="container mt-5">
+        <h1 th:text="${title}"/>
+        <div th:each="el : ${posts}" class="alert alert-info mt-2">
+            <h3 th:text="${el.title}"></h3><br>
+            <p th:text="${el.anons}"></p><br>
+            <a th:href="'/news/' + ${el.id}" class="btn btn-primary">Подробнее</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>nirsfill</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body >
+<header th:insert="parts/navbar :: navbar"></header>
+<div class="container mt-5 mb-5">
+    <div th:each="el : ${post}" class="alert alert-info mt-2">
+        <h1 th:text="${el.title}"></h1><br>
+        <p th:text="${el.full_text}"></p><br>
+        <div class="form-row">
+        <div class="form-group col-mb-2">
+        <a th:href="'/news/' + ${el.id} + '/edit'" class="btn btn-info">Редактировать</a><br><br>
+            </div>
+        <form th:action="'/news/' + ${el.id} + '/remove'" method="post">
+            <div class="form-group col-md-2">
+            <button class="btn btn-danger" type="submit">Удалить</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
+</body>
+</html>
