@@ -22,7 +22,7 @@ public class NewsController {
     public String main(Model model) {
        Iterable<Post> posts = postRepo.findAll();
        model.addAttribute("posts",posts);
-        return "news";
+       return "news";
     }
 
     @GetMapping("/news/{id}")

@@ -5,8 +5,20 @@
         <nav class="nav my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="/">Главная</a>
             <a class="p-2 text-dark" href="/news">Новости</a>
-            <a class="p-2 text-dark" href="/adminPanel">Админка</a>
-            <a href="/login">  <button class="btn btn-primary" type="submit">Войти</button></a>
+
+            <div sec:authorize="isAuthenticated()">
+                <a class="p-2 text-dark" href="/adminPanel">Админка</a>
+            </div>
+
+
+
+            <div sec:authorize ="isAnonymous()">
+                <a href="/login">  <button class="btn btn-primary" type="submit">Войти</button></a>
+            </div>
+
+            <div sec:authorize="isAuthenticated()">
+                <a href="/logout">Logout</a>
+            </div>
 
         </nav>
 
