@@ -16,6 +16,8 @@
         <div th:each="el : ${#numbers.sequence(posts.size() - 1, 0, -1)}" class="alert alert-info mt-2">
             <h3 th:text="${posts[el].title}"></h3><br>
             <p th:text="${posts[el].anons}"></p><br>
+            <span th:text="${posts[el].create_date} ? 'Дата создания:' + ${posts[el].create_date} : '' "> </span>
+            <span th:text="${posts[el].update_date} ? 'Дата обновления:' + ${posts[el].update_date} : ''"> </span>
             <a th:href="'/news/' + ${posts[el].id}" class="btn btn-primary">Подробнее</a>
         </div>
 
