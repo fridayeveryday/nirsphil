@@ -34,6 +34,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
+                //.failureUrl("/?login_error") // нужно добавить страницу при ошибке авторизации либо чето сделать, или оставить так как есть
+                .defaultSuccessUrl("/", true) // got from here: https://stackoverflow.com/questions/53221381/uncorrect-redirect-after-login-spring-boot
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/");
     }
