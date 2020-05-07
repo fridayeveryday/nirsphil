@@ -7,14 +7,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 </head>
 <body >
+
+
+</div>
 <header th:insert="parts/navbar :: navbar"></header>
     <div class="container mt-5">
         <h1 th:text="${title}"/>
-        <div th:each="el : ${posts}" class="alert alert-info mt-2">
-            <h3 th:text="${el.title}"></h3><br>
-            <p th:text="${el.anons}"></p><br>
-            <a th:href="'/news/' + ${el.id}" class="btn btn-primary">Подробнее</a>
+        <div th:each="el : ${#numbers.sequence(posts.size() - 1, 0, -1)}" class="alert alert-info mt-2">
+            <h3 th:text="${posts[el].title}"></h3><br>
+            <p th:text="${posts[el].anons}"></p><br>
+            <a th:href="'/news/' + ${posts[el].id}" class="btn btn-primary">Подробнее</a>
         </div>
+
     </div>
 </body>
 </html>
