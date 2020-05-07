@@ -1,7 +1,7 @@
 package com.example.web.repo;
 
 import com.example.web.models.Post;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface postRepo extends CrudRepository<Post, Long> {
+public interface postRepo extends PagingAndSortingRepository<Post, Long> {
 }
