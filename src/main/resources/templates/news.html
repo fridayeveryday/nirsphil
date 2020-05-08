@@ -19,6 +19,10 @@
             <span th:text="${posts[el].create_date} ? 'Дата создания:' + ${posts[el].create_date} : '' "> </span>
             <span th:text="${posts[el].update_date} ? 'Дата обновления:' + ${posts[el].update_date} : ''"> </span>
             <a th:href="'/news/' + ${posts[el].id}" class="btn btn-primary">Подробнее</a>
+          <span>  <strong th:text="${posts[el].author} ? 'автор' +  ${posts[el].author.getUsername()} : 'nooooooooo'"></strong></span>
+<!--          <span> <strong th:text="${posts[el].author} ? 'обновил' +${posts[el].author.getUsername()} : 'nooooooooo'"></strong></span>-->
+
+
         </div>
 
     </div>
