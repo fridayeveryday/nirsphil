@@ -1,9 +1,6 @@
 package com.example.web.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Post {
@@ -15,15 +12,38 @@ public class Post {
     private String create_date;
     private String update_date;
 
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+//    private long user_id;
+    private User author;
+
+
+//
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "update_user_id")
+//    private User update_author;
+//
+//    public User getUpdate_author() {
+//        return update_author;
+//    }
+//
+//    public void setUpdate_author(User update_author) {
+//        this.update_author = update_author;
+//    }
+
     public Post() {
 
     }
 
-    public Post(String title, String anons, String full_text, String create_date) {
+
+    public Post(String title, String anons, String full_text, String create_date, User author) {
         this.title = title;
         this.anons = anons;
         this.full_text = full_text;
         this.create_date = create_date;
+        this.author = author;
     }
 
     public Long getId() {
@@ -81,5 +101,12 @@ public class Post {
 
     public void setCreate_date(String create_date) {
         this.create_date = create_date;
+    }
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }
