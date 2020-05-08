@@ -67,7 +67,7 @@ public class NewsController {
         post.setTitle(title);
         post.setAnons(anons);
         post.setFull_text(full_text);
-        post.setUpdate_date(date_of_update);
+//        post.setUpdate_date(date_of_update);
         postRepo.save(post);
         return "redirect:/news";
     }

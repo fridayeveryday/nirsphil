@@ -5,19 +5,38 @@ import javax.persistence.*;
 @Entity
 public class Post {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
-    private String title, anons, full_text;
-    private int vievs;
-    private String create_date;
-    private String update_date;
+    private String title;
+    private String  anons;
+    @Lob
+    private String full_text;
 
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-//    private long user_id;
-    private User author;
+
+    @OneToOne
+    @MapsId
+    private MetaPost metaPost;
+
+    public MetaPost getMetaPost() {
+        return metaPost;
+    }
+
+    public void setMetaPost(MetaPost metaPost) {
+        this.metaPost = metaPost;
+    }
+
+//    private int vievs;
+//    private String create_date;
+//    private String update_date;
+
+//
+//
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "user_id")
+////    private long user_id;
+//    private User author;
 
 
 //
@@ -38,12 +57,14 @@ public class Post {
     }
 
 
-    public Post(String title, String anons, String full_text, String create_date, User author) {
+    public Post(String title, String anons, String full_text
+//            , String create_date, User author
+    ) {
         this.title = title;
         this.anons = anons;
         this.full_text = full_text;
-        this.create_date = create_date;
-        this.author = author;
+//        this.create_date = create_date;
+//        this.author = author;
     }
 
     public Long getId() {
@@ -78,35 +99,35 @@ public class Post {
         this.full_text = full_text;
     }
 
-    public int getVievs() {
-        return vievs;
-    }
-
-    public void setVievs(int vievs) {
-        this.vievs = vievs;
-    }
-
-
-    public String getUpdate_date() {
-        return update_date;
-    }
-
-    public void setUpdate_date(String update_date) {
-        this.update_date = update_date;
-    }
-
-    public String getCreate_date() {
-        return create_date;
-    }
-
-    public void setCreate_date(String create_date) {
-        this.create_date = create_date;
-    }
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
+//    public int getVievs() {
+//        return vievs;
+//    }
+//
+//    public void setVievs(int vievs) {
+//        this.vievs = vievs;
+//    }
+//
+//
+//    public String getUpdate_date() {
+//        return update_date;
+//    }
+//
+//    public void setUpdate_date(String update_date) {
+//        this.update_date = update_date;
+//    }
+//
+//    public String getCreate_date() {
+//        return create_date;
+//    }
+//
+//    public void setCreate_date(String create_date) {
+//        this.create_date = create_date;
+//    }
+//    public User getAuthor() {
+//        return author;
+//    }
+//
+//    public void setAuthor(User author) {
+//        this.author = author;
+//    }
 }

@@ -1,8 +1,11 @@
 package com.example.web.controller;
 import com.example.web.config.DateOfPostConfig;
+import com.example.web.models.MetaPost;
 import com.example.web.models.Post;
 import com.example.web.models.User;
+import com.example.web.models.WholePost;
 import com.example.web.repo.postRepo;
+import com.example.web.repo.MetaPostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -28,6 +31,7 @@ public class AdminPanelController {
 
     @Autowired
     private postRepo postRepo;
+    private MetaPostRepo metaPostRepo;
     @GetMapping("/news-add")
     public String postAdd(
             @AuthenticationPrincipal User author,
@@ -38,7 +42,10 @@ public class AdminPanelController {
             Model model) {
             System.out.println(author.getUsername());
             String date_of_create = DateOfPostConfig.getDate(create_date);
-            Post post = new Post(title,anons,full_text, date_of_create, author);
+            MetaPost metaPost = new MetaPost( date_of_create, author);
+            Post post = new Post(title,anons,full_text);
+//            WholePost wholePost = new WholePost(post, metaPost);
+            metaPostRepo.save(metaPost);
             postRepo.save(post);
         return "redirect:/news";
     }
