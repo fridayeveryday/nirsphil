@@ -1,4 +1,5 @@
 package com.example.web.controller;
+import com.example.web.config.DateOfPostConfig;
 import com.example.web.models.Post;
 import com.example.web.repo.postRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,10 @@ public class AdminPanelController {
             @RequestParam String title,
             @RequestParam String anons,
             @RequestParam String full_text,
+            @RequestParam long create_date,
             Model model) {
-
-            Post post = new Post(title,anons,full_text);
+            String date_of_create = DateOfPostConfig.getDate(create_date);
+            Post post = new Post(title,anons,full_text, date_of_create);
             postRepo.save(post);
         return "redirect:/news";
     }

@@ -11,16 +11,24 @@
     <div th:each="el : ${post}" class="alert alert-info mt-2">
         <h1 th:text="${el.title}"></h1><br>
         <p th:text="${el.full_text}"></p><br>
+
+        <span th:text="${el.create_date} ? 'Дата создания:' + ${el.create_date} : '' "> </span>
+        <span th:text="${el.update_date} ? 'Дата обновления:' + ${el.update_date} : ''"> </span>
         <div class="form-row">
-        <div class="form-group col-mb-2">
-        <a th:href="'/news/' + ${el.id} + '/edit'" class="btn btn-info">Редактировать</a><br><br>
+            <!--<div sec:authorize="hasAuthority('ADMIN')"> Внутри этого div видно только админам   -->
+
+
+            <div sec:authorize="hasAuthority('ADMIN')">
+                 <div class="form-group col-mb-2">
+                       <a th:href="'/news/' + ${el.id} + '/edit'" class="btn btn-info">Редактировать</a><br><br>
+                 </div>
+                    <form th:action="'/news/' + ${el.id} + '/remove'" method="post">
+                        <div class="form-group col-md-2">
+                            <button class="btn btn-danger" type="submit">Удалить</button>
+                        </div>
+                    </form>
             </div>
-        <form th:action="'/news/' + ${el.id} + '/remove'" method="post">
-            <div class="form-group col-md-2">
-            <button class="btn btn-danger" type="submit">Удалить</button>
-            </div>
-        </form>
-    </div>
+        </div>
     </div>
 </div>
 </body>

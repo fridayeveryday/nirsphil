@@ -12,15 +12,18 @@ public class Post {
     private Long id;
     private String title, anons, full_text;
     private int vievs;
+    private String create_date;
+    private String update_date;
 
     public Post() {
 
     }
 
-    public Post(String title, String anons, String full_text) {
+    public Post(String title, String anons, String full_text, String create_date) {
         this.title = title;
         this.anons = anons;
         this.full_text = full_text;
+        this.create_date = create_date;
     }
 
     public Long getId() {
@@ -64,11 +67,19 @@ public class Post {
     }
 
 
+    public String getUpdate_date() {
+        return update_date;
+    }
 
+    public void setUpdate_date(String update_date) {
+        this.update_date = update_date;
+    }
 
+    public String getCreate_date() {
+        return create_date;
+    }
 
-
-
-
-
+    public void setCreate_date(String create_date) {
+        this.create_date = create_date;
+    }
 }
