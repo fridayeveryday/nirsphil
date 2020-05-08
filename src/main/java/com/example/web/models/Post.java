@@ -7,7 +7,10 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String title, anons, full_text;
+    private String title;
+    private String anons;
+    @Lob
+    private String full_text;
     private int vievs;
     private String create_date;
     private String update_date;
