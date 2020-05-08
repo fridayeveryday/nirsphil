@@ -10,7 +10,7 @@
             <a class="p-2 text-dark" href="/">Главная</a>
             <a class="p-2 text-dark" href="/news">Новости</a>
 
-            <div sec:authorize="isAuthenticated()">
+            <div sec:authorize="hasAuthority('ADMIN')">
                 <a class="p-2 text-dark" href="/adminPanel">Админка</a>
             </div>
 
