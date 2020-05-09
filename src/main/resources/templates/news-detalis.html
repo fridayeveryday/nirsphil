@@ -11,11 +11,10 @@
     <div th:each="el : ${post}" class="alert alert-info mt-2">
         <h1 th:text="${el.title}"></h1><br>
         <p th:text="${el.full_text}"></p><br>
-
         <span th:text="${el.create_date} ? 'Дата создания:' + ${el.create_date} : '' "> </span>
         <span th:text="${el.update_date} ? 'Дата обновления:' + ${el.update_date} : ''"> </span>
         автор <strong th:text="${el.author} ? ${el.author.getUsername()} : 'nooooooooo'"></strong>
-
+        <div>12345</div>
         <div class="form-row">
             <!--<div sec:authorize="hasAuthority('ADMIN')"> Внутри этого div видно только админам   -->
 
