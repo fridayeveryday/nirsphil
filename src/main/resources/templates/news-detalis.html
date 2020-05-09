@@ -3,6 +3,7 @@
 <head>
     <title>nirsfill</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body >
@@ -11,26 +12,31 @@
     <div th:each="el : ${post}" class="alert alert-info mt-2">
         <h1 th:text="${el.title}"></h1><br>
         <p th:text="${el.full_text}"></p><br>
+
         <span th:text="${el.create_date} ? 'Дата создания:' + ${el.create_date} : '' "> </span>
-        <span th:text="${el.update_date} ? 'Дата обновления:' + ${el.update_date} : ''"> </span>
-        автор <strong th:text="${el.author} ? ${el.author.getUsername()} : 'nooooooooo'"></strong>
-        <div>12345</div>
-        <div class="form-row">
+        <br><span th:text="${el.update_date} ? 'Дата обновления:' + ${el.update_date} : ''"> </span>
+        <br> Автор:  <strong th:text="${el.author} ? ${el.author.getUsername()} : 'nooooooooo'"></strong>
+
+
+
+        <div class="form-row" style="margin-top:1em; margin-bottom: -2em; ">
             <!--<div sec:authorize="hasAuthority('ADMIN')"> Внутри этого div видно только админам   -->
 
-
             <div sec:authorize="hasAuthority('ADMIN')">
-                 <div class="form-group col-mb-2">
+                <div class="btn-group" role="group">
+                    <div class="form-group col-mb-2">
                        <a th:href="'/news/' + ${el.id} + '/edit'" class="btn btn-info">Редактировать</a><br><br>
-                 </div>
+                    </div>
                     <form th:action="'/news/' + ${el.id} + '/remove'" method="post">
                         <div class="form-group col-md-2">
                             <button class="btn btn-danger" type="submit">Удалить</button>
                         </div>
                     </form>
+                </div>
             </div>
-        </div>
-    </div>
+
+         </div></div>
 </div>
+    </div>
 </body>
 </html>
