@@ -9,34 +9,42 @@
 <body >
 <header th:insert="parts/navbar :: navbar"></header>
 <div class="container mt-5 mb-5">
-    <div th:each="el : ${post}" class="alert alert-info mt-2">
+
+        <div th:each="el : ${post}" class="alert alert-info mt-2">
         <h1 th:text="${el.title}"></h1><br>
-        <p th:text="${el.full_text}"></p><br>
+            <div class="col-12" style="margin-left: -15px; ">  <p th:text="${el.full_text}"></p><br></div>
 
-        <span th:text="${el.create_date} ? 'Дата создания:' + ${el.create_date} : '' "> </span>
-        <br><span th:text="${el.update_date} ? 'Дата обновления:' + ${el.update_date} : ''"> </span>
-        <br> Автор:  <strong th:text="${el.author} ? ${el.author.getUsername()} : 'nooooooooo'"></strong>
-
-
-
-        <div class="form-row" style="margin-top:1em; margin-bottom: -2em; ">
-            <!--<div sec:authorize="hasAuthority('ADMIN')"> Внутри этого div видно только админам   -->
-
-            <div sec:authorize="hasAuthority('ADMIN')">
-                <div class="btn-group" role="group">
-                    <div class="form-group col-mb-2">
-                       <a th:href="'/news/' + ${el.id} + '/edit'" class="btn btn-info">Редактировать</a><br><br>
-                    </div>
-                    <form th:action="'/news/' + ${el.id} + '/remove'" method="post">
-                        <div class="form-group col-md-2">
-                            <button class="btn btn-danger" type="submit">Удалить</button>
-                        </div>
-                    </form>
-                </div>
+        <div class="row md-n5">
+            <div class="col-8 md-5">
+            <span th:text="${el.create_date} ? 'Дата создания: ' + ${el.create_date} : '' "> </span>
+          <br>  <span th:text="${el.update_date} ? 'Дата обновления: ' + ${el.update_date} : ''"> </span>
+          <br>  Автор:  <strong th:text="${el.author} ? ${el.author.getUsername()} : 'nooooooooo'"></strong>
             </div>
 
-         </div></div>
+
+                 <form class="form-row">
+
+                        <!--<div sec:authorize="hasAuthority('ADMIN')"> Внутри этого div видно только админам   -->
+
+                         <div sec:authorize="hasAuthority('ADMIN')">
+
+                    <div class="btn-group" role="group" style="padding-top: 1.5em; padding-left: 3em; ">
+                        <div class="form-group col-mb-2">
+                           <a th:href="'/news/' + ${el.id} + '/edit'" class="btn btn-info">Редактировать</a><br><br>
+                        </div>
+                        <form th:action="'/news/' + ${el.id} + '/remove'" method="post">
+                            <div class="form-group col-md-2">
+                                <button class="btn btn-danger" type="submit">Удалить</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                 </form>
+                 </div>
+        </div>
 </div>
-    </div>
+</div>
 </body>
 </html>

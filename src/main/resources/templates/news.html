@@ -12,19 +12,31 @@
 </div>
 <header th:insert="parts/navbar :: navbar"></header>
     <div class="container mt-5">
-        <h1 th:text="${title}"/>
-        <div th:each="el : ${#numbers.sequence(posts.size() - 1, 0, -1)}" class="alert alert-info mt-2">
-            <h3 th:text="${posts[el].title}"></h3><br>
-            <p th:text="${posts[el].anons}"></p><br>
-            <br><span th:text="${posts[el].create_date} ? 'Дата создания:' + ${posts[el].create_date} : '' "> </span>
-            <br><span th:text="${posts[el].update_date} ? 'Дата обновления:' + ${posts[el].update_date} : ''"> </span>
 
-         <br> <span>  <strong th:text="${posts[el].author} ? 'Автор: ' +  ${posts[el].author.getUsername()} : 'nooooooooo'"></strong></span>
-<!--          <span> <strong th:text="${posts[el].author} ? 'обновил' +${posts[el].author.getUsername()} : 'nooooooooo'"></strong></span>-->
-            <a th:href="'/news/' + ${posts[el].id}" class="btn btn-primary">Подробнее</a>
+        <div th:each="el : ${#numbers.sequence(posts.size() - 1, 0, -1)}" class="alert alert-info mt-2">
+            <a th:href="'/news/' + ${posts[el].id}"><h1 th:text="${posts[el].title}"></h1><br></a>
+            <p th:text="${posts[el].anons}"></p><br>
+
+                <div class="row mx-md-n5">
+
+                    <div class="col md-5" >
+                        <div class="text-left" >
+                        <span><strong th:text="${posts[el].author} ? 'Автор: ' +  ${posts[el].author.getUsername()} : 'nooooooooo'"></strong></span>
+                        <!--   <br><span th:text="${posts[el].create_date} ? 'Дата создания:' + ${posts[el].create_date} : '' "> </span> -->
+                        <div class="mr-1">    <span th:text="${posts[el].update_date} ? '' + ${posts[el].update_date} : ''"> </span></div>
+                        </div>
+                    </div>
+
+                    <div class="col md-5 mt-3.5">
+                        <div class="text-right" >
+                            <a th:href="'/news/' + ${posts[el].id}" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                    <!-- <span> <strong th:text="${posts[el].author} ? 'обновил' +${posts[el].author.getUsername()} : 'nooooooooo'"></strong></span>-->
+                    </div>
 
         </div>
 
-    </div>
-</body>
-</html>
+       </div>
+   </body>
+   </html>
