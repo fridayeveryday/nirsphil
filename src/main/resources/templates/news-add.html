@@ -9,7 +9,7 @@
 </head>
 <body >
 <header th:insert="parts/navbar :: navbar"></header>
-<form action="/news-add" method="get">
+<form th:action="'/news-add'" method="post">
     <div class="container mt-5 mb-5">
         <div class="container mt-5 mb-5">
             <div class="mx-auto" >
@@ -18,24 +18,25 @@
                     <div class="my-4"> <h4> <strong> Добавление статьи</h4> </strong></div>
                     <div class="col-lg-8">
 
-            <input type="text" name="title" placeholder="Введите наззвание статьи" class="form-control">
+                        <input type="text" name="title" placeholder="Введите наззвание статьи" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-lg-8">
-            <input type="text" name="anons" placeholder="Введите анонс статьи" class="form-control">
+                        <input type="text" name="anons" placeholder="Введите анонс статьи" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-lg-8">
-            <textarea name="full_text" placeholder="Введите полный текст статьи" class="form-control"></textarea>
+                        <textarea name="full_text" placeholder="Введите полный текст статьи" class="form-control"></textarea>
                     </div>
                 </div>
                 <input name="create_date" id="create_date" style="display: none"><script> set_date("create_date")</script>
                 <div class="col-lg-8">
-            <button type="submit" class="btn btn-success" >Добавить статью</button>
+                    <button type="submit" class="btn btn-success" >Добавить статью</button>
                 </div>
-        </form>
+                <input type="hidden" name="_csrf" value="${_csrf.token}" />
+</form>
     </div>
 </div>
 </body>

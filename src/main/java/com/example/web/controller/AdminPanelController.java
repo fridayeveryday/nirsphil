@@ -28,7 +28,7 @@ public class AdminPanelController {
 
     @Autowired
     private postRepo postRepo;
-    @GetMapping("/news-add")
+    @PostMapping("/news-add")
     public String postAdd(
             @AuthenticationPrincipal User author,
             @RequestParam String title,
