@@ -13,7 +13,7 @@
 
 
 
-    <div th:each="el : ${post}" >
+<div th:each="el : ${post}" >
     <form th:action="'/news/' + ${el.id} + '/edit'" method="post">
         <div class="container mt-5 mb-5">
             <div class="mx-auto" >
