@@ -22,32 +22,24 @@
 
 
 
-        <div class="form-row">
-            <!--<div sec:authorize="hasAuthority('ADMIN')"> Внутри этого div видно только админам   -->
 
-                 <form class="form-row">
 
-                        <!--<div sec:authorize="hasAuthority('ADMIN')"> Внутри этого div видно только админам   -->
+            <div class="form-row">
+                <!--<div sec:authorize="hasAuthority('ADMIN')"> Внутри этого div видно только админам   -->
 
-                         <div sec:authorize="hasAuthority('ADMIN')">
 
-                    <div class="btn-group" role="group" style="padding-top: 1.5em; padding-left: 3em; ">
-                        <div class="form-group col-mb-2">
-                           <a th:href="'/news/' + ${el.id} + '/edit'" class="btn btn-info">Редактировать</a><br><br>
-                        </div>
-                        <form th:action="'/news/' + ${el.id} + '/remove'" method="post">
-                            <div class="form-group col-md-2">
-                                <button class="btn btn-danger" type="submit">Удалить</button>
-                            </div>
-                        </form>
-
+                <div sec:authorize="hasAuthority('ADMIN')">
+                    <div class="form-group col-mb-2">
+                        <a th:href="'/news/' + ${el.id} + '/edit'" class="btn btn-info">Редактировать</a><br><br>
                     </div>
+                    <form th:action="'/news/' + ${el.id} + '/remove'" method="post">
+                        <div class="form-group col-md-2">
+                            <button class="btn btn-danger" type="submit">Удалить</button>
+                        </div>
+                    </form>
                 </div>
-
-                 </form>
-                 </div>
+            </div>
         </div>
-</div>
 </div>
 </body>
 </html>
