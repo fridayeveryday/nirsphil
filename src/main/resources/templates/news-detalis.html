@@ -10,7 +10,7 @@
 <body >
 <header th:insert="parts/navbar :: navbar"></header>
 <div class="container mt-5 mb-5">
-        <span class="qwe">AHAHHAHAH</span>
+
         <div th:each="el : ${post}" class="alert alert-info mt-2">
         <h1 th:text="${el.title}"></h1><br>
 <!--        <p th:text="${el.full_text}"></p><br>-->
@@ -31,7 +31,7 @@
 
                          <div sec:authorize="hasAuthority('ADMIN')">
 
-                    <div class="btn-group" role="group" style="padding-top: 1.5em; padding-left: 3em; ">
+                    <div class="btn-group" role="group" >
                         <div class="form-group col-mb-2">
                            <a th:href="'/news/' + ${el.id} + '/edit'" class="btn btn-info">Редактировать</a><br><br>
                         </div>

@@ -7,10 +7,10 @@
 </head>
 <body >
 <header th:insert="parts/navbar :: navbar"></header>
-
+<div class="container mt-5">
 <form method="post" th:action="'/user'">
 <input type="text" th:value="${user.username}" name="username">
-<div >
+
     <select name="role">
 
         <option th:each=" role : ${roles}"
@@ -19,7 +19,7 @@
                 th:selected="${#lists.contains(user.roles, role)}"
                 th:name="${role}"/>
     </select>
-</div>
+
 
 <!-- For a checkbox mode, if there is a multiple choice of roles-->
 <!--    <div th:each="role : ${roles}" >-->
@@ -32,9 +32,15 @@
 <!--        </label>-->
 
 <!--    </div>-->
-    <input type="hidden" th:value="${user.id}" name="userId">
-    <input type="hidden" name="_csrf" value="${_csrf.token}" />
-    <button type="submit">Сохранить</button>
+    <div class="btn-group" role="group" >
+
+        <div class="form-group col-mb-2">
+             <input  class="form-control" type="hidden" th:value="${user.id}" name="userId">
+            <input  class="form-control" type="hidden" name="_csrf" value="${_csrf.token}" />
+             <button class="btn btn-primary" type="submit">Сохранить</button>
+        </div>
+</div>
 </form>
+</div>
 </body>
 </html>
