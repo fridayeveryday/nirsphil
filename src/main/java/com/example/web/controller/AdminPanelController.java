@@ -28,18 +28,5 @@ public class AdminPanelController {
 
     @Autowired
     private postRepo postRepo;
-    @PostMapping("/news-add")
-    public String postAdd(
-            @AuthenticationPrincipal User author,
-            @RequestParam String title,
-            @RequestParam String anons,
-            @RequestParam String full_text,
-            @RequestParam long create_date,
-            Model model) {
-            System.out.println(author.getUsername());
-            String date_of_create = DateOfPostConfig.getDate(create_date);
-            Post post = new Post(title,anons,full_text, date_of_create, author);
-            postRepo.save(post);
-        return "redirect:/news";
-    }
+
 }

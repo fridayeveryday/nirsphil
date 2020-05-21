@@ -11,8 +11,11 @@
 
 </div>
 <header th:insert="parts/navbar :: navbar"></header>
+        <div class="col-lg-4 mt-2">
+            <a href="/adminPanel/add"> <button class="btn btn-primary btn-lg " type="submit">Добавить статью</button></a>
+        </div>
     <div class="container mt-5">
-        <h1 th:text="${title}"/>
+<!--        <h1 th:text="${title}"/>-->
         <div th:each="el : ${#numbers.sequence(posts.size() - 1, 0, -1)}" class="alert alert-info mt-2">
             <h3 th:text="${posts[el].title}"></h3><br>
             <p th:text="${posts[el].anons}"></p><br>

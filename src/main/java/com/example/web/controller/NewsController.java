@@ -2,10 +2,14 @@ package com.example.web.controller;
 
 import com.example.web.config.DateOfPostConfig;
 import com.example.web.models.Post;
+import com.example.web.models.User;
 import com.example.web.repo.postRepo;
+import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,10 +40,16 @@ public class NewsController {
         Optional<Post> post = postRepo.findById(id);
         ArrayList<Post> res = new ArrayList<>();
         post.ifPresent(res::add);
+        // convert to html
+        String raw_data = res.get(0).getFull_text();
+        raw_data = StringEscapeUtils.unescapeHtml4(raw_data);
+        res.get(0).setFull_text(raw_data);
+
         model.addAttribute("post",res);
         return "news-detalis";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/news/{id}/edit")
     public String NewsEdit(@PathVariable(value = "id") long id, Model model) {
         if(!postRepo.existsById(id)){
@@ -49,6 +59,11 @@ public class NewsController {
         Optional<Post> post = postRepo.findById(id);
         ArrayList<Post> res = new ArrayList<>();
         post.ifPresent(res::add);
+
+        String raw_data = res.get(0).getFull_text();
+        raw_data = StringEscapeUtils.unescapeHtml4(raw_data);
+        res.get(0).setFull_text(raw_data);
+
         model.addAttribute("post",res);
         return "news-edit";
     }
@@ -58,7 +73,7 @@ public class NewsController {
             @PathVariable(value = "id") long id,
             @RequestParam() String title,
             @RequestParam() String anons,
-            @RequestParam() String full_text,
+            @RequestParam() String raw_data,
             @RequestParam() long update_date,
             Model model) {
         String date_of_update = DateOfPostConfig.getDate(update_date);
@@ -66,6 +81,9 @@ public class NewsController {
         Post post = postRepo.findById(id).orElseThrow(IllegalStateException::new);
         post.setTitle(title);
         post.setAnons(anons);
+
+        String full_text = StringEscapeUtils.escapeHtml4(raw_data);
+
         post.setFull_text(full_text);
         post.setUpdate_date(date_of_update);
         postRepo.save(post);
@@ -78,5 +96,21 @@ public class NewsController {
         return "redirect:/news";
     }
 
+    @PostMapping("/news-add")
+    public String postAdd(
+            @AuthenticationPrincipal User author,
+            @RequestParam String title,
+            @RequestParam String anons,
+            @RequestParam String raw_data,
+            @RequestParam long create_date,
+            Model model) {
+        System.out.println(author.getUsername());
+        String date_of_create = DateOfPostConfig.getDate(create_date);
+        // to store as html
+        String full_text = StringEscapeUtils.escapeHtml4(raw_data);
+        Post post = new Post(title,anons,full_text, date_of_create, author);
+        postRepo.save(post);
+        return "redirect:/news";
+    }
 
 }

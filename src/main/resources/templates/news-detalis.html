@@ -3,6 +3,8 @@
 <head>
     <title>nirsfill</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body >
@@ -10,11 +12,14 @@
 <div class="container mt-5 mb-5">
     <div th:each="el : ${post}" class="alert alert-info mt-2">
         <h1 th:text="${el.title}"></h1><br>
-        <p th:text="${el.full_text}"></p><br>
-
+<!--        <p th:text="${el.full_text}"></p><br>-->
+        <div th:utext="${el.full_text}"></div>
+        <div id="clear_data"></div>
         <span th:text="${el.create_date} ? 'Дата создания:' + ${el.create_date} : '' "> </span>
         <span th:text="${el.update_date} ? 'Дата обновления:' + ${el.update_date} : ''"> </span>
         автор <strong th:text="${el.author} ? ${el.author.getUsername()} : 'nooooooooo'"></strong>
+
+
 
         <div class="form-row">
             <!--<div sec:authorize="hasAuthority('ADMIN')"> Внутри этого div видно только админам   -->
