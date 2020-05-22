@@ -9,7 +9,9 @@
 <header th:insert="parts/navbar :: navbar"></header>
 <div class="container mt-5">
 <form method="post" th:action="'/user'">
-<input type="text" th:value="${user.username}" name="username">
+   <div th:insert="parts/user_account::user_account"></div>
+
+
 
     <select name="role">
 
@@ -17,7 +19,7 @@
                 th:value="${role}"
                 th:utext="${role}"
                 th:selected="${#lists.contains(user.roles, role)}"
-                th:name="${role}"/>
+                th:name="${role}"></option>
     </select>
 
 

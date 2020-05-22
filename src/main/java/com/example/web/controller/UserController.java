@@ -23,41 +23,68 @@ public class UserController {
     private UserRepo userRepo;
 
     @GetMapping
-    public String userList(Model model){
+    public String userList(Model model) {
         model.addAttribute("users", userRepo.findAll());
 
         return "userList";
     }
+
     @GetMapping("{user}")
-    public String userEditForm(@PathVariable User user, Model model){
+    public String userEditForm(@PathVariable User user, Model model) {
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
 
         return "userEdit";
     }
 
-    // The commented lines if use in html a select-option mode to choose a role.
-    // But the current version can work with both the select-option mode and a checkbox, if use "form.values()" instead "form.keySet()"
-    // If use the select-option mode one needs delete "Set<String>...",  whole "for..."
+
     @PostMapping
     public String userSave(
             @Valid String role,
-            @RequestParam String username,
+
+//            @RequestParam String firstname,
+//            @RequestParam String lastname,
+//            @RequestParam String patronymic,
+//            @RequestParam String email,
+//            @RequestParam String password,
+
             @RequestParam Map<String, String> form,
-            @RequestParam("userId") User user){
-        user.setUsername(username);
+            @RequestParam("userId") User user,
+            Model model) {
+        if (form.get("email").isEmpty()) {
+            model.addAttribute("error", "email не может быть пустым");
+            model.addAttribute("roles", Role.values());
+            user.setEmail(form.get("email"));
+            model.addAttribute("user", user);
+            return "userEdit";
+        }
+        if (!form.get("email").equals(user.getEmail())) {
+            if (userRepo.findByEmail(form.get("email")) != null) {
+                model.addAttribute("error", "Пользователь с таким email уже существует");
+                model.addAttribute("roles", Role.values());
+                user.setEmail(form.get("email"));
+                model.addAttribute("user", user);
+                return "userEdit";
+            }
+        }
+            user.setFirstname(form.get("firstname"));
+            user.setLastname(form.get("lastname"));
+            user.setPatronymic(form.get("patronymic"));
+            user.setEmail(form.get("email"));
+            user.setPassword(form.get("password"));
 
-//       Set<String> roles = Arrays.stream(Role.values()).map(Role::name).collect(Collectors.toSet());
 
-       user.getRoles().clear();
-//
-//       for (String key : form.keySet()){
-//            if (roles.contains(key)){
-//                user.getRoles().add(Role.valueOf(key));
-//            }
-//       }
-        user.getRoles().add(Role.valueOf(role));
-        userRepo.save(user);
+            //для обычного пользователя, который не может менять себе роль
+            if (!form.containsKey("role")) {
+
+                userRepo.save(user);
+                return "redirect:/";
+            }
+            user.getRoles().clear();
+            user.getRoles().add(Role.valueOf(role));
+            userRepo.save(user);
+
+
         return "redirect:/user";
     }
 }

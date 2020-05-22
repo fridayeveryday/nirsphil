@@ -12,10 +12,10 @@
             <a class="p-2 text-dark" href="/news">Новости</a>
         <div class="admin">
             <div  sec:authorize="isAuthenticated()" >
-<!--            <div sec:authorize="hasAuthority('ADMIN')">  Заменить при релизе-->
-                <a class="p-2 text-dark" href="/adminPanel">Админка</a>
+                <a class="p-2 text-dark" href="/account">Личный кабинет</a>
             </div>
         </div>
+
 
             <div sec:authorize ="isAnonymous()">
                 <a class="p-2 text-dark" href="/login">  <button class="btn btn-primary" type="submit">Войти</button></a>

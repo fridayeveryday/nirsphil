@@ -23,10 +23,13 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser(User user, Map<String, Object> model) {
-        User userFromDb = userRepo.findByUsername(user.getUsername());
-
+        User userFromDb = userRepo.findByEmail(user.getEmail());
+//          Если введены не все данные вернуть на дозаполнение
+//        if(user)
         if (userFromDb != null) {
-            model.put("message", "User exists!");
+            String error_string = "Пользователь с таким e-mail уже существует";
+            model.put("message", error_string);
+            model.put("user",user);
             return "registration";
         }
 

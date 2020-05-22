@@ -1,0 +1,18 @@
+<div th:fragment="user_account">
+    <span>Имя</span>
+    <input type="text" th:value="${user}?${user.firstname}:''" name="firstname">
+
+    <span>Фамилия</span>
+    <input type="text" th:value="${user}?${user.lastname}:'' " name="lastname">
+
+    <span>Отчество</span>
+    <input type="text" th:value="${user}?${user.patronymic}:''" name="patronymic">
+
+    <!--/* span error для ошибок типа пустая графа почта или уже существующая почта*/-->
+    <span>email</span><span id="error" th:text="${error} ? ${error}:''"></span>
+    <input type="text" th:value="${user}?${user.email}:''" name="email">
+
+    <span>Пароль</span>
+    <!--    сделать кнопку-глазик для сокрытия пароля-->
+    <input type="text" th:value="${user}?${user.password}:''" name="password">
+</div>

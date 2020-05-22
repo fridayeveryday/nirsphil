@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>nirsfill</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="parts/navbar :: navbar"></header>
+    <form method="post" th:action="'/user'">
+        <div th:insert="parts/user_account::user_account"></div>
+        <input  class="form-control" type="hidden" th:value="${user.id}" name="userId">
+        <input  class="form-control" type="hidden" name="_csrf" value="${_csrf.token}" />
+        <button class="btn btn-primary btn-lg " type="submit"> Сохранить данные</button>
+
+    </form>
+    <div  sec:authorize="isAuthenticated()" >
+<!--при релизе вставить это-->
+<!--    <div class="container mt-5" sec:authorize="hasAuthority('ADMIN')">-->
+        <a th:href="'/user'">
+            <button class="btn btn-primary btn-lg " type="submit"> Список пользователей</button>
+        </a>
+
+        <a th:href="'/'">
+            <button class="btn btn-primary btn-lg " type="submit"> Список Мероприятий</button>
+        </a>
+    </div>
+
+</body>
+</html>
