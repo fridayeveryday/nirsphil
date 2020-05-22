@@ -8,11 +8,8 @@
 <body >
 <header th:insert="parts/navbar :: navbar"></header>
     <div class="container mt-5">
-        <div class="col-lg-4 mt-2">
-        <a href="/adminPanel/add"> <button class="btn btn-primary btn-lg " type="submit">Добавить статью</button></a>
-        </div>
+        <a th:href="'/user'">  <button class="btn btn-primary btn-lg " type="submit"> Список пользователей </button> </a>
     </div>
-</div>
-<a th:href="'/user'">list</a>
+
 </body>
 </html>
