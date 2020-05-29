@@ -27,8 +27,11 @@
             <!--<div sec:authorize="hasAuthority('ADMIN')"> Внутри этого div видно только админам   -->
 
             <form th:action="'/action/' + ${el.id} + '/reg'" method="post">
-                <div class="form-group col-md-2">
-                    <button class="btn btn-danger" type="submit">Мероприятие</button>
+                <div th:if="${!chek}" class="form-group col-md-2">
+                    <button class="btn btn-danger" type="submit">Зарегестрироваться</button>
+                </div>
+                <div th:if="${chek}" class="form-group col-md-2">
+                    <button class="btn btn-danger" type="submit">Отменить регестрацию</button>
                 </div>
             </form>
 

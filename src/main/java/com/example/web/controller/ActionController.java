@@ -29,6 +29,7 @@ import java.util.Optional;
 
 @Controller
 public class ActionController {
+    @Autowired
     private UserRepo userRepo;
     @Autowired
     private actionRepo actionRepo;
@@ -48,10 +49,14 @@ public class ActionController {
 
 
     @GetMapping("/action/{id}")
-    public String ActionsDetails(@PathVariable(value = "id") long id, Model model) {
+    public String ActionsDetails(@PathVariable(value = "id") long id,@AuthenticationPrincipal User user, Model model) {
         if(!actionRepo.existsById(id)){
             return "redirect:/action";
         }
+        Action action_user = actionRepo.findById(id).orElseThrow(IllegalStateException::new);
+        Long id_user = user.getId();
+        boolean chek = action_user.getList_id().contains(id_user);
+        model.addAttribute("chek",chek);
 
         Optional<Action> action = actionRepo.findById(id);
         ArrayList<Action> res = new ArrayList<>();
@@ -62,6 +67,7 @@ public class ActionController {
         res.get(0).setFull_text(raw_data);
 
         model.addAttribute("action",res);
+
         return "action-detalis";
     }
 
@@ -118,10 +124,31 @@ public class ActionController {
         return "redirect:/action";
     }
 
-    @PostMapping("/action/{id}/reg")
-    public String Reg(@PathVariable(value = "id") long id,Model model) {
 
-        return "redirect:/action";
+
+
+    @PostMapping("/action/{id}/reg")
+    public String Reg(@PathVariable(value = "id") long id, @AuthenticationPrincipal User user,Model model) {
+        Action action = actionRepo.findById(id).orElseThrow(IllegalStateException::new);
+        Long id_user = user.getId();
+        User user1 = userRepo.findById(id_user).orElseThrow(IllegalStateException::new);
+
+        boolean chek = action.getList_id().contains(id_user);
+        if(chek){
+            user1.getList_action_id().remove(id);
+            userRepo.save(user1);
+            action.getList_id().remove(id_user);
+            actionRepo.save(action);
+
+        }
+        else {
+            user1.getList_action_id().add(id);
+            userRepo.save(user1);
+            action.getList_id().add(id_user);
+            actionRepo.save(action);
+        }
+
+        return "redirect:/action/{id}";
     }
 
 
