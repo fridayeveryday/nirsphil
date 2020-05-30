@@ -36,7 +36,7 @@ public class ActionController {
 
     @GetMapping("/action")
     public String main(Model model) {
-        Iterable<Action> actions = actionRepo.findAll();
+        Iterable<Action> actions = actionRepo.findAll(Sort.by("id"));
         model.addAttribute("actions",actions);
         return "action";
     }
@@ -53,6 +53,7 @@ public class ActionController {
         if(!actionRepo.existsById(id)){
             return "redirect:/action";
         }
+
         Action action_user = actionRepo.findById(id).orElseThrow(IllegalStateException::new);
         Long id_user = user.getId();
         boolean chek = action_user.getList_id().contains(id_user);
