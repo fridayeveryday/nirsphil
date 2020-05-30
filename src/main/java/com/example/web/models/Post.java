@@ -1,7 +1,9 @@
 package com.example.web.models;
 
-import javax.persistence.*;
+import org.hibernate.annotations.Proxy;
 
+import javax.persistence.*;
+//@Proxy(lazy = false)
 @Entity
 public class Post {
     @Id

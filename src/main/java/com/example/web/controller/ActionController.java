@@ -4,12 +4,10 @@ package com.example.web.controller;
 
 import com.example.web.config.DateOfPostConfig;
 import com.example.web.models.Action;
-import com.example.web.models.Post;
 import com.example.web.models.User;
 import com.example.web.repo.UserRepo;
 import com.example.web.repo.actionRepo;
 import org.apache.commons.text.StringEscapeUtils;
-import org.hibernate.action.internal.EntityAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,12 +19,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Fetch;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 @Controller
 public class ActionController {
     @Autowired
@@ -43,8 +39,34 @@ public class ActionController {
 
     @GetMapping("/action-add")
     public String createNewAction(Model model) {
+        List<User> a = userRepo.findAll();
+
         return "action-add";
     }
+
+    @Transactional
+    @GetMapping("/user-actions")
+    public String UserACtion(@AuthenticationPrincipal User user,Model model) {
+        List<Action> actions = (List<Action>) actionRepo.findAll();
+        Long id = user.getId();
+        User user1 = userRepo.findById(id).orElseThrow(IllegalStateException::new);
+        List<Long> l = user1.getList_action_id();
+
+        ArrayList<Action> res = new ArrayList<>();
+        for (int i = 0; i < l.size(); i++) {
+            Long a = l.get(i);
+            for (int j = 0; j < actions.size() ; j++) {
+                Long b = actions.get(j).getId();
+                if(a.equals(b)){
+                    res.add(actions.get(j));
+                }
+            }
+        }
+
+        model.addAttribute("actions",res);
+        return "user-actions";
+    }
+
 
 
 

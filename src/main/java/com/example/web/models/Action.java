@@ -1,9 +1,11 @@
 package com.example.web.models;
 
+import org.hibernate.annotations.Proxy;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+//@Proxy(lazy = false)
 @Entity
 public class Action {
     @Id
