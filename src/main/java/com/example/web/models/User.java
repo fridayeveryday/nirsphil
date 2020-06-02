@@ -1,12 +1,16 @@
 package com.example.web.models;
 
+import org.hibernate.annotations.Proxy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
-
+//@Proxy(lazy = false)
 @Entity
 @Table(name = "usr")
 public class User implements UserDetails {
@@ -16,11 +20,21 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private boolean active;
-
+    @ElementCollection
+    private List<Long> list_action_id = new ArrayList<Long>();
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+
+    public List<Long> getList_action_id() {
+        return list_action_id;
+    }
+
+    public void setList_action_id(List<Long> list_action_id) {
+        this.list_action_id = list_action_id;
+    }
 
     public Long getId() {
         return id;

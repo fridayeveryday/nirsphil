@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>nirsfill</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/style.css}" rel="stylesheet"   >
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+</head>
+<body >
+
+
+</div>
+<header th:insert="parts/navbar :: navbar"></header>
+
+<div class="container mt-5">
+   
+    <!--        <h1 th:text="${title}"/>-->
+    <div th:each="el : ${#numbers.sequence(actions.size() - 1, 0, -1)}" class="alert alert-info mt-2">
+        <a th:href="'/action/' + ${actions[el].id}"><h1 th:text="${actions[el].title}"></h1><br></a>
+        <p th:text="${actions[el].anons}"></p><br>
+
+        <div class="row mx-md-n5">
+
+            <div class="col md-5" >
+                <div class="text-left" >
+                    <span><strong th:text="${actions[el].author} ? 'Автор: ' +  ${actions[el].author.getUsername()} : 'nooooooooo'"></strong></span>
+                    <!--   <br><span th:text="${posts[el].create_date} ? 'Дата создания:' + ${posts[el].create_date} : '' "> </span> -->
+                    <div class="mr-1">    <span th:text="${actions[el].update_date} ? '' + ${actions[el].update_date} : ''"> </span></div>
+                </div>
+            </div>
+
+            <div class="col md-5 mt-3.5">
+                <div class="text-right" >
+                    <a th:href="'/action/' + ${actions[el].id}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+            <!-- <span> <strong th:text="${posts[el].author} ? 'обновил' +${posts[el].author.getUsername()} : 'nooooooooo'"></strong></span>-->
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

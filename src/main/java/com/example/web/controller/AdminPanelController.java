@@ -26,6 +26,7 @@ public class AdminPanelController {
         return "news-add";
     }
 
+
     @Autowired
     private postRepo postRepo;
 
