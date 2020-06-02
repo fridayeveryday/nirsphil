@@ -50,11 +50,11 @@ public class ActionController {
         List<Action> actions = (List<Action>) actionRepo.findAll();
         Long id = user.getId();
         User user1 = userRepo.findById(id).orElseThrow(IllegalStateException::new);
-        List<Long> l = user1.getList_action_id();
+        List<Long> list_action_id = user1.getList_action_id();
 
         ArrayList<Action> res = new ArrayList<>();
-        for (int i = 0; i < l.size(); i++) {
-            Long a = l.get(i);
+        for (int i = 0; i < list_action_id.size(); i++) {
+            Long a = list_action_id.get(i);
             for (int j = 0; j < actions.size() ; j++) {
                 Long b = actions.get(j).getId();
                 if(a.equals(b)){
@@ -62,6 +62,8 @@ public class ActionController {
                 }
             }
         }
+
+        
 
         model.addAttribute("actions",res);
         return "user-actions";
