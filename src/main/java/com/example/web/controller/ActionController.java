@@ -44,7 +44,15 @@ public class ActionController {
         return "action-add";
     }
 
-    @Transactional
+    @PostMapping("/action/{id}/action-users")
+    public String ActionOfUsers(@PathVariable(value = "id") long id,@AuthenticationPrincipal User user,Model model) {
+        Action action = actionRepo.findById(id).orElseThrow(IllegalStateException::new);
+        User user1 = userRepo.findById(user.getId()).orElseThrow(IllegalStateException::new);
+        model.addAttribute("users",user1);
+        return "action-users";
+    }
+
+
     @GetMapping("/user-actions")
     public String UserACtion(@AuthenticationPrincipal User user,Model model) {
         List<Action> actions = (List<Action>) actionRepo.findAll();
@@ -62,8 +70,6 @@ public class ActionController {
                 }
             }
         }
-
-        
 
         model.addAttribute("actions",res);
         return "user-actions";
