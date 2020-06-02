@@ -7,6 +7,7 @@ import com.example.web.models.Action;
 import com.example.web.models.User;
 import com.example.web.repo.UserRepo;
 import com.example.web.repo.actionRepo;
+import com.example.web.service.UserSevice;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -47,8 +48,21 @@ public class ActionController {
     @PostMapping("/action/{id}/action-users")
     public String ActionOfUsers(@PathVariable(value = "id") long id,@AuthenticationPrincipal User user,Model model) {
         Action action = actionRepo.findById(id).orElseThrow(IllegalStateException::new);
-        User user1 = userRepo.findById(user.getId()).orElseThrow(IllegalStateException::new);
-        model.addAttribute("users",user1);
+        List<Long> list_users_id = action.getList_id();
+        List<User> list_user =  userRepo.findAll();
+        ArrayList<User> res = new ArrayList<>();
+        for (int i = 0; i < list_users_id.size(); i++) {
+            Long a = list_users_id.get(i);
+            for (int j = 0; j < list_user.size() ; j++) {
+                Long b = list_user.get(j).getId();
+                if(a.equals(b)){
+                    res.add(list_user.get(j));
+                }
+            }
+        }
+
+
+        model.addAttribute("users",res);
         return "action-users";
     }
 

@@ -10,11 +10,10 @@
 
 <div class="container mt-5">
     <table>
-        <thead><tr> <th>Имя</th> <th>Роль</th> <th></th> </tr>  </thead>
+        <thead><tr> <th>Имя</th> <th>почта</th> <th></th> </tr>  </thead>
         <tbody>
 
         <tr th:each="user : ${users}">
-            <td th:text="${user.username}"></td>
             <td th:text="${user.username}"></td>
 
         </tr>
