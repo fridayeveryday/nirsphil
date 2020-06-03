@@ -35,6 +35,13 @@
                 </div>
             </form>
 
+            <form th:action="'/action/' + ${el.id} + '/action-users'" method="post">
+                <div class="form-group col-md-2">
+                    <button class="btn btn-danger" type="submit">Список участников</button>
+                </div>
+
+            </form>
+
             <div sec:authorize="hasAuthority('ADMIN')">
                 <div class="form-group col-mb-2">
                     <a th:href="'/action/' + ${el.id} + '/edit'" class="btn btn-info">Редактировать</a><br><br>

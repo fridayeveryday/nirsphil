@@ -28,6 +28,7 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
 
+
     public List<Long> getList_action_id() {
         return list_action_id;
     }
