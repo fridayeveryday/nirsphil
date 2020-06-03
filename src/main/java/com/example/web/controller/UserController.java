@@ -4,15 +4,19 @@ import com.example.web.models.Role;
 import com.example.web.models.User;
 import com.example.web.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -39,52 +43,41 @@ public class UserController {
 
 
     @PostMapping
+    @PreAuthorize("isAuthenticated()")
     public String userSave(
             @Valid String role,
-
-//            @RequestParam String firstname,
-//            @RequestParam String lastname,
-//            @RequestParam String patronymic,
-//            @RequestParam String email,
-//            @RequestParam String password,
-
             @RequestParam Map<String, String> form,
             @RequestParam("userId") User user,
             Model model) {
-        if (form.get("email").isEmpty()) {
-            model.addAttribute("error", "email не может быть пустым");
-            model.addAttribute("roles", Role.values());
-            user.setEmail(form.get("email"));
-            model.addAttribute("user", user);
-            return "userEdit";
-        }
-        if (!form.get("email").equals(user.getEmail())) {
-            if (userRepo.findByEmail(form.get("email")) != null) {
-                model.addAttribute("error", "Пользователь с таким email уже существует");
-                model.addAttribute("roles", Role.values());
-                user.setEmail(form.get("email"));
-                model.addAttribute("user", user);
+        // если есть недочоеты в введенной форме
+//        SaveUserController suc = new SaveUserController();
+        if (!SaveUserController.checking4Correctness(form, user, model, userRepo)) {
+            // если есть в форме поле old_password, то это ввод обычного user
+            if (form.containsKey("new_password")) {
+                return "account";
+            } else {
+                // иначе это ошибка из-под админа
                 return "userEdit";
             }
         }
-            user.setFirstname(form.get("firstname"));
-            user.setLastname(form.get("lastname"));
-            user.setPatronymic(form.get("patronymic"));
-            user.setEmail(form.get("email"));
-            user.setPassword(form.get("password"));
-
-
-            //для обычного пользователя, который не может менять себе роль
-            if (!form.containsKey("role")) {
-
-                userRepo.save(user);
-                return "redirect:/";
-            }
-            user.getRoles().clear();
-            user.getRoles().add(Role.valueOf(role));
+        // если все ок, то сохраняем имена, почту и пароль
+        user = SaveUserController.setData(form);
+        //для обычного пользователя, который не может менять себе роль
+        if (!form.containsKey("role")) {
             userRepo.save(user);
-
+            return "redirect:/";
+        }
+        // устанавливаем роль если под админом вход
+//тщетная попытка исправить косяк со сменой ролей
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//         user = (User) authentication.getPrincipal();
+//
+        user.getRoles().clear();
+        user.getRoles().add(Role.valueOf(role));
+        userRepo.save(user);
 
         return "redirect:/user";
     }
+
+
 }

@@ -16,7 +16,7 @@ function enable_editor(editor_id, hidden_input_id, button_id, preview_button_cla
 
 }
 
-function en_dis_able(editor_id, hidden_input_id, button_id, edit_button_class, preview_button_class) {
+function en_dis_able_editor(editor_id, hidden_input_id, button_id, edit_button_class, preview_button_class) {
     if ($('#' + button_id).hasClass(edit_button_class)) {
         enable_editor(editor_id, hidden_input_id, button_id, preview_button_class)
     }else{

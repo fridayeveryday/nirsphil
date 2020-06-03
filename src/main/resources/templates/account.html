@@ -3,28 +3,40 @@
 <head>
     <title>nirsfill</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
 <header th:insert="parts/navbar :: navbar"></header>
-    <form method="post" th:action="'/user'">
-        <div th:insert="parts/user_account::user_account"></div>
-        <input  class="form-control" type="hidden" th:value="${user.id}" name="userId">
-        <input  class="form-control" type="hidden" name="_csrf" value="${_csrf.token}" />
-        <button class="btn btn-primary btn-lg " type="submit"> Сохранить данные</button>
+<form method="post" th:action="'/user'">
+    <div th:insert="parts/user_account::user_account_open_data"></div>
+    <div id="password_div" th:insert="parts/user_account::password_inputs4account"></div>
 
-    </form>
-    <div  sec:authorize="isAuthenticated()" >
-<!--при релизе вставить это-->
-<!--    <div class="container mt-5" sec:authorize="hasAuthority('ADMIN')">-->
-        <a th:href="'/user'">
-            <button class="btn btn-primary btn-lg " type="submit"> Список пользователей</button>
-        </a>
 
-        <a th:href="'/'">
-            <button class="btn btn-primary btn-lg " type="submit"> Список Мероприятий</button>
-        </a>
-    </div>
+    <input class="form-control" type="hidden" th:value="${user.id}" name="userId">
+    <input class="form-control" type="hidden" name="_csrf" value="${_csrf.token}"/>
+    <button class="btn btn-primary btn-lg enable_btn_class" type="submit" id="submit_button_id"> Сохранить данные
+    </button>
 
+</form>
+<div id="change_password_id"> Изменить пароль</div>
+<!--<a th:href="'change-password/' + ${user.id}"> Изменить Пароль</a>-->
+<div sec:authorize="isAuthenticated()">
+    <!--при релизе вставить это-->
+    <!--    <div class="container mt-5" sec:authorize="hasAuthority('ADMIN')">-->
+    <a th:href="'/user'">
+        <button class="btn btn-primary btn-lg " type="submit"> Список пользователей</button>
+    </a>
+
+    <a th:href="'/'">
+        <button class="btn btn-primary btn-lg " type="submit"> Список Мероприятий</button>
+    </a>
+</div>
+<script type="text/javascript" th:src="@{/js/password_checker.js}"></script>
+<script type="text/javascript">
+    $(document).ready(checker('password_div_id', 'old_password_id',
+        'new_password_id', 'new_password2_id', 'empty_error_id', 'mismatched_pass_error_id',
+        'submit_button_id', 'enable_btn_class', 'disable_btn_class'))
+</script>
 </body>
 </html>

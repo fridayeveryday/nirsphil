@@ -9,11 +9,12 @@
 <header th:insert="parts/navbar :: navbar"></header>
 <div class="container mt-5">
 <form method="post" th:action="'/user'">
-   <div th:insert="parts/user_account::user_account"></div>
+   <div th:insert="parts/user_account::user_account_open_data"></div>
+   <div th:insert="parts/user_account::single_password_input"></div>
 
 
-
-    <select name="role">
+<!--    <div class="container mt-5" sec:authorize="hasAuthority('ADMIN')">-->
+        <select name="role">
 
         <option th:each=" role : ${roles}"
                 th:value="${role}"
@@ -22,18 +23,8 @@
                 th:name="${role}"></option>
     </select>
 
-
-<!-- For a checkbox mode, if there is a multiple choice of roles-->
-<!--    <div th:each="role : ${roles}" >-->
-
-<!--        <label>-->
-<!--            <span th:text="${role}"></span>-->
-<!--            <input type="checkbox" th:checked="${#lists.contains(user.roles, role)}"  th:name="${role}">-->
-
-
-<!--        </label>-->
-
 <!--    </div>-->
+
     <div class="btn-group" role="group" >
 
         <div class="form-group col-mb-2">

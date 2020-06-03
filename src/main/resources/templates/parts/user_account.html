@@ -1,4 +1,4 @@
-<div th:fragment="user_account">
+<div th:fragment="user_account_open_data">
     <span>Имя</span>
     <input type="text" th:value="${user}?${user.firstname}:''" name="firstname">
 
@@ -11,8 +11,32 @@
     <!--/* span error для ошибок типа пустая графа почта или уже существующая почта*/-->
     <span>email</span><span id="error" th:text="${error} ? ${error}:''"></span>
     <input type="text" th:value="${user}?${user.email}:''" name="email">
+</div>
 
+
+<div th:fragment="single_password_input">
     <span>Пароль</span>
     <!--    сделать кнопку-глазик для сокрытия пароля-->
-    <input type="text" th:value="${user}?${user.password}:''" name="password">
+    <input type="text" name="password">
+</div>
+
+
+<div id="password_div_id" th:fragment="password_inputs4account">
+
+    <span id="error" th:text="${password_error} ? ${password_error}:''"></span>
+<!--    для личного кабинета-->
+
+        <span id="empty_error_id"></span>
+        <span>Ваш старый пароль</span>
+        <!--    сделать кнопку-глазик для сокрытия пароля-->
+        <input id="old_password_id" type="text" name="password">
+
+        <span>Ваш новый пароль</span>
+        <!--    сделать кнопку-глазик для сокрытия пароля-->
+        <input id="new_password_id" type="text" name="new_password">
+
+        <span>Повторите новый пароль</span>
+        <!--    сделать кнопку-глазик для сокрытия пароля-->
+        <input id="new_password2_id" type="text" name="new_password2">
+        <span id="mismatched_pass_error_id"></span>
 </div>
