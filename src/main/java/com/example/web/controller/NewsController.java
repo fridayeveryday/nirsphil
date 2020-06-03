@@ -31,6 +31,13 @@ public class NewsController {
        return "news";
     }
 
+    @GetMapping("/news/add")
+    public String OpenAddPage(){
+        return "/news-add";
+    }
+
+
+
     @GetMapping("/news/{id}")
     public String NewsDetails(@PathVariable(value = "id") long id, Model model) {
         if(!postRepo.existsById(id)){
