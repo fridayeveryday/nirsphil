@@ -9,3 +9,22 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.js"></script>
 
 </div>
+
+<div th:fragment="summernote_editor">
+    <div id="editor"></div>
+    <input type="hidden" name="raw_data" id="raw_data" th:value="${el} ? ${el.full_text}:''">
+    <input name="date" id="date" type="hidden">
+    <script>/*параметр - id input*/ set_date("date")</script>
+    <!--/*
+                     editor - id редактора,
+                     raw_data - id input для данных с html тегами,
+                     button_id - id кнопки переключения режима редкатирования/предпросмотра,
+                     e,p - class кнопки переключения режима редкатирования/предпросмотра соотвественно для задания css стиля кнопок через классы
+                    */-->
+    <input type="button" id="button_id" class="e" onclick="en_dis_able_editor('editor', 'raw_data', 'button_id', 'e', 'p')" value="Редактировать">
+    <!--/*Подключение скрипта и вызов редактора при закгрзке страницы*/-->
+    <script type="text/javascript" th:src="@{/js/editor_switcher.js}"></script>
+    <script type="text/javascript">
+        $(document).ready(en_dis_able_editor('editor', 'raw_data', 'button_id', 'e', 'p'))
+    </script>
+</div>

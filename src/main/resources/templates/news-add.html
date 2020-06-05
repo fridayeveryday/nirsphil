@@ -29,23 +29,15 @@
                         <input type="text" name="anons" placeholder="Введите анонс статьи" class="form-control">
                     </div>
                 </div>
-                <div id="editor"></div>
-                <div class="form-group">
 
-                    <input type="hidden" name="raw_data" id="raw_data">
-<!--                    <div class="col-lg-8">-->
-<!--                        <textarea name="full_text" placeholder="Введите полный текст статьи" class="form-control"></textarea>-->
-<!--                    </div>-->
+                <div class="form-group">
+                    <!--Вставка шаблона редактора-->
+                    <div th:insert="parts/summernote::summernote_editor">
+                    </div>
+
                 </div>
-                <input name="create_date" id="create_date" type="hidden"><script>/*параметр - id input*/ set_date("create_date")</script>
                 <div class="col-lg-8">
-                    <!--/*
-                      editor - id редактора,
-                      raw_data - id input для данных с html тегами,
-                      button_id - id кнопки переключения режима редкатирования/предпросмотра,
-                      e,p - class кнопки переключения режима редкатирования/предпросмотра соотвественно для задания css стиля кнопок через классы
-                     */-->
-                    <input type="button" id="button_id" class="e" onclick="en_dis_able_editor('editor', 'raw_data', 'button_id', 'e', 'p')" value="Редактировать">
+
                     <button type="submit" class="btn btn-success" >Добавить статью</button>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
@@ -53,10 +45,6 @@
         </div>
     </div>
 </form>
-<!--/*Подключение скрипта и вызов редактора при закгрзке страницы*/-->
-<script type="text/javascript" th:src="@{/js/editor_switcher.js}"></script>
-<script type="text/javascript">
-    $(document).ready(en_dis_able_editor('editor', 'raw_data', 'button_id', 'e', 'p'))
-</script>
+
 </body>
 </html>
