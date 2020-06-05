@@ -5,46 +5,68 @@
     <title>Spring Security Example </title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/parts/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 </head>
 <body>
 <header th:insert="parts/navbar :: navbar"></header>
 <form th:action="@{/registration}" method="post">
-
+    <div id="error" th:text="${message} ? ${message}: ''"></div>
     <div class="container mt-5 mb-5 ">
-        <div class="mx-auto" >
+        <div class="mx-auto">
             <div class="form-group row justify-content-md-center">
-                <div class="mt-4"> <h4> <strong>Регистрация </strong> </h4> </div>
+                <div class="mt-4"><h4><strong>Регистрация </strong></h4></div>
             </div>
-            <div class="form-group row justify-content-md-center">
-                <div class="col-lg-4">
-                    <input type="text" name="username" class="form-control" placeholder="Ваше имя" />
-                </div>
-            </div>
-            <div class="form-group row justify-content-md-center">
-                <div class="col-lg-4">
-                    <input type="password" name="password" class="form-control" placeholder="Пароль" />
-                </div>
-            </div>
-            <div class="form-group row justify-content-md-center">
-                <div class="col-lg-4">
-                    <input type="email" name="email" class="form-control" placeholder="some@some.com" />
-                </div>
-                <div class="invalid-feedback">
-                    Введите существующий e-mail.
-                </div>
-            </div>
+
+<!--            <div class="form-group row justify-content-md-center">-->
+<!--                <div class="col-lg-4">-->
+<!--                    <input type="text" name="firstname" class="form-control" placeholder="Ваше имя"-->
+<!--                           th:value="${user}?${user.firstname}:''"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group row justify-content-md-center">-->
+<!--                <div class="col-lg-4">-->
+<!--                    <input type="text" name="lastname" class="form-control" placeholder="Ваша Фамилия"-->
+<!--                           th:value="${user}?${user.lastname}:'' "/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group row justify-content-md-center">-->
+<!--                <div class="col-lg-4">-->
+<!--                    <input type="text" name="patronymic" class="form-control" placeholder="Ваше Отчество"-->
+<!--                           th:value="${user}?${user.patronymic}:''"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group row justify-content-md-center">-->
+<!--                <div class="col-lg-4">-->
+<!--                    <input type="email" name="email" class="form-control" placeholder="some@some.com"-->
+<!--                           th:value="${user}?${user.email}:''"/>-->
+<!--                </div>-->
+<!--                <div class="invalid-feedback">-->
+<!--                    Введите существующий e-mail.-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group row justify-content-md-center">-->
+<!--                <div class="col-lg-4">-->
+<!--                    <input type="password" name="password" class="form-control" placeholder="Пароль"/>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            вставка из шаблона-->
+            <div th:insert="parts/user_account::user_account_open_data"></div>
+            <div th:insert="parts/user_account::single_password_input"></div>
+
+
             <div class="form-group row justify-content-md-center">
                 <div class="col-lg-4 mt-2">
                     <button class="btn btn-primary btn-lg btn-block" type="submit">Зарегистрироваться</button>
                 </div>
             </div>
             <div class="form-group row justify-content-md-center">
-                    <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                    <p > Уже есть аккаунт? <a href="/login">Войти</a> </p>
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <p> Уже есть аккаунт? <a href="/login">Войти</a></p>
             </div>
-    </div>
         </div>
+    </div>
     </div>
 
 

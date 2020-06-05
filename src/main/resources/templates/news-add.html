@@ -29,7 +29,7 @@
                         <input type="text" name="anons" placeholder="Введите анонс статьи" class="form-control">
                     </div>
                 </div>
-                <textarea id="editor"></textarea>
+                <div id="editor"></div>
                 <div class="form-group">
 
                     <input type="hidden" name="raw_data" id="raw_data">
@@ -45,7 +45,7 @@
                       button_id - id кнопки переключения режима редкатирования/предпросмотра,
                       e,p - class кнопки переключения режима редкатирования/предпросмотра соотвественно для задания css стиля кнопок через классы
                      */-->
-                    <input type="button" id="button_id" class="e" onclick="en_dis_able('editor', 'raw_data', 'button_id', 'e', 'p')" value="Редактировать">
+                    <input type="button" id="button_id" class="e" onclick="en_dis_able_editor('editor', 'raw_data', 'button_id', 'e', 'p')" value="Редактировать">
                     <button type="submit" class="btn btn-success" >Добавить статью</button>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
@@ -56,7 +56,7 @@
 <!--/*Подключение скрипта и вызов редактора при закгрзке страницы*/-->
 <script type="text/javascript" th:src="@{/js/editor_switcher.js}"></script>
 <script type="text/javascript">
-    $(document).ready(en_dis_able('editor', 'raw_data', 'button_id', 'e', 'p'))
+    $(document).ready(en_dis_able_editor('editor', 'raw_data', 'button_id', 'e', 'p'))
 </script>
 </body>
 </html>

@@ -31,6 +31,13 @@ public class NewsController {
        return "news";
     }
 
+    @GetMapping("/news/add")
+    public String OpenAddPage(){
+        return "/news-add";
+    }
+
+
+
     @GetMapping("/news/{id}")
     public String NewsDetails(@PathVariable(value = "id") long id, Model model) {
         if(!postRepo.existsById(id)){
@@ -45,11 +52,12 @@ public class NewsController {
         raw_data = StringEscapeUtils.unescapeHtml4(raw_data);
         res.get(0).setFull_text(raw_data);
 
+
         model.addAttribute("post",res);
         return "news-detalis";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/news/{id}/edit")
     public String NewsEdit(@PathVariable(value = "id") long id, Model model) {
         if(!postRepo.existsById(id)){
