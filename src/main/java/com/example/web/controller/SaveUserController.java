@@ -24,8 +24,8 @@ public class SaveUserController {
         // корректность пароля и почты
         // в случае ошибок принимает false и в модель добавляются сообщения об ошибках
         boolean correctData = true;
-
-        if (form.containsKey("new_password") && !checkPassword(form.get("password"), user.getPassword())) {
+        // в форме есть поле new_password (ввод нового пароля) и поля старого пароля пустое (значит пользователь решил его не менять)
+        if (form.containsKey("new_password") && !form.get("password").isEmpty() && !checkPassword(form.get("password"), user.getPassword())) {
             model.addAttribute("password_error", "Старый пароль введен неверно, пожалуйста проверьте его корректность");
             correctData = false;
         }
