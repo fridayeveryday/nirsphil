@@ -50,9 +50,9 @@ public class SaveUserController {
         return correctData;
     }
 
-    public static User setData(Map<String, String> form) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
+    public static User setData(Map<String, String> form, User user) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        User user = (User) authentication.getPrincipal();
 
         user.setFirstname(form.get("firstname"));
         user.setLastname(form.get("lastname"));
@@ -64,7 +64,9 @@ public class SaveUserController {
         if (!form.get("password").equals("") && form.containsKey("new_password")) {
             user.setPassword(new BCryptPasswordEncoder().encode(form.get("new_password")));
         }else {
-            user.setPassword(new BCryptPasswordEncoder().encode(form.get("password")));
+            if (!form.get("password").equals("")){
+                user.setPassword(new BCryptPasswordEncoder().encode(form.get("password")));
+            }
         }
 
         return user;

@@ -2,7 +2,7 @@ package com.example.web.controller;
 
 import com.example.web.config.DateOfPostConfig;
 import com.example.web.models.Post;
-import com.example.web.models.PostExtended;
+//import com.example.web.models.PostExtended;
 import com.example.web.models.User;
 import com.example.web.repo.postRepo;
 import org.apache.commons.text.StringEscapeUtils;

@@ -61,17 +61,14 @@ public class UserController {
             }
         }
         // если все ок, то сохраняем имена, почту и пароль
-        user = SaveUserController.setData(form);
+        user = SaveUserController.setData(form, user);
         //для обычного пользователя, который не может менять себе роль
         if (!form.containsKey("role")) {
             userRepo.save(user);
             return "redirect:/";
         }
         // устанавливаем роль если под админом вход
-//тщетная попытка исправить косяк со сменой ролей
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//         user = (User) authentication.getPrincipal();
-//
+
         user.getRoles().clear();
         user.getRoles().add(Role.valueOf(role));
         userRepo.save(user);
