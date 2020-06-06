@@ -7,7 +7,6 @@ import com.example.web.models.Action;
 import com.example.web.models.User;
 import com.example.web.repo.UserRepo;
 import com.example.web.repo.actionRepo;
-import com.example.web.service.UserSevice;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -126,9 +124,9 @@ public class ActionController {
             @RequestParam() String title,
             @RequestParam() String anons,
             @RequestParam() String raw_data,
-            @RequestParam() long update_date,
+            @RequestParam() long date,
             Model model) {
-        String date_of_update = DateOfPostConfig.getDate(update_date);
+        String date_of_update = DateOfPostConfig.getDate(date);
 
         Action action = actionRepo.findById(id).orElseThrow(IllegalStateException::new);
         action.setTitle(title);
@@ -204,10 +202,10 @@ public class ActionController {
             @RequestParam String title,
             @RequestParam String anons,
             @RequestParam String raw_data,
-            @RequestParam long create_date,
+            @RequestParam long date,
             Model model) {
         System.out.println(author.getUsername());
-        String date_of_create = DateOfPostConfig.getDate(create_date);
+        String date_of_create = DateOfPostConfig.getDate(date);
         // to store as html
         List<Long> list_id = new ArrayList<>();
         String full_text = StringEscapeUtils.escapeHtml4(raw_data);

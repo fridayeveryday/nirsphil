@@ -6,9 +6,7 @@ import com.example.web.models.User;
 import com.example.web.repo.postRepo;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,14 +24,20 @@ public class NewsController {
 
     @GetMapping("/news")
     public String main(Model model) {
-       Iterable<Post> posts = postRepo.findAll(Sort.by("id"));
-       model.addAttribute("posts",posts);
-       return "news";
+        Iterable<Post> posts = postRepo.findAll(Sort.by("id"));
+        model.addAttribute("posts", posts);
+        return "news";
     }
+
+    @GetMapping("/news/add")
+    public String OpenAddPage() {
+        return "/news-add";
+    }
+
 
     @GetMapping("/news/{id}")
     public String NewsDetails(@PathVariable(value = "id") long id, Model model) {
-        if(!postRepo.existsById(id)){
+        if (!postRepo.existsById(id)) {
             return "redirect:/news";
         }
 
@@ -45,14 +49,15 @@ public class NewsController {
         raw_data = StringEscapeUtils.unescapeHtml4(raw_data);
         res.get(0).setFull_text(raw_data);
 
-        model.addAttribute("post",res);
+
+        model.addAttribute("post", res);
         return "news-detalis";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/news/{id}/edit")
     public String NewsEdit(@PathVariable(value = "id") long id, Model model) {
-        if(!postRepo.existsById(id)){
+        if (!postRepo.existsById(id)) {
             return "redirect:/news";
         }
 
@@ -64,7 +69,7 @@ public class NewsController {
         raw_data = StringEscapeUtils.unescapeHtml4(raw_data);
         res.get(0).setFull_text(raw_data);
 
-        model.addAttribute("post",res);
+        model.addAttribute("post", res);
         return "news-edit";
     }
 
@@ -74,9 +79,10 @@ public class NewsController {
             @RequestParam() String title,
             @RequestParam() String anons,
             @RequestParam() String raw_data,
-            @RequestParam() long update_date,
+            // дата обновления
+            @RequestParam() long date,
             Model model) {
-        String date_of_update = DateOfPostConfig.getDate(update_date);
+        String date_of_update = DateOfPostConfig.getDate(date);
 
         Post post = postRepo.findById(id).orElseThrow(IllegalStateException::new);
         post.setTitle(title);
@@ -89,8 +95,9 @@ public class NewsController {
         postRepo.save(post);
         return "redirect:/news";
     }
+
     @PostMapping("/news/{id}/remove")
-    public String NewsDelete(@PathVariable(value = "id") long id,Model model) {
+    public String NewsDelete(@PathVariable(value = "id") long id, Model model) {
         Post post = postRepo.findById(id).orElseThrow(IllegalStateException::new);
         postRepo.delete(post);
         return "redirect:/news";
@@ -102,14 +109,19 @@ public class NewsController {
             @RequestParam String title,
             @RequestParam String anons,
             @RequestParam String raw_data,
-            @RequestParam long create_date,
+            // дата создания
+            @RequestParam long date,
             Model model) {
+//        if (ManageTextDataController.add(author, title, anons, raw_data, date, model, postRepo)) {
+//            return "redirect:/news";
+//        }
         System.out.println(author.getUsername());
-        String date_of_create = DateOfPostConfig.getDate(create_date);
+        String date_of_create = DateOfPostConfig.getDate(date);
         // to store as html
         String full_text = StringEscapeUtils.escapeHtml4(raw_data);
         Post post = new Post(title,anons,full_text, date_of_create, author);
         postRepo.save(post);
+        //если какие ошибки вернуть че нить))
         return "redirect:/news";
     }
 

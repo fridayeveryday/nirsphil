@@ -4,6 +4,8 @@ import com.example.web.models.Role;
 import com.example.web.models.User;
 import com.example.web.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,15 +25,20 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser(User user, Map<String, Object> model) {
-        User userFromDb = userRepo.findByUsername(user.getUsername());
-
+        User userFromDb = userRepo.findByEmail(user.getEmail());
+//          Если введены не все данные вернуть на дозаполнение
+//        if(user)
         if (userFromDb != null) {
-            model.put("message", "User exists!");
+            String error_string = "Пользователь с таким e-mail уже существует";
+            model.put("message", error_string);
+            model.put("user",user);
             return "registration";
         }
 
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepo.save(user);
 
         return "redirect:/login";
