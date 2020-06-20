@@ -1,63 +1,24 @@
 package com.example.web.models;
 
-import org.hibernate.annotations.Proxy;
-
 import javax.persistence.*;
-//@Proxy(lazy = false)
-@Entity
-public class Post {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String title;
-    private String anons;
+
+public class TextData {
+
+    protected String title;
+    protected String anons;
     @Lob
-    private String full_text;
-    private int vievs;
-    private String create_date;
-    private String update_date;
-
-
+    protected String full_text;
+    protected int vievs;
+    protected String create_date;
+    protected String update_date;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
 //    private long user_id;
-    private User author;
+    protected User author;
 
 
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "update_user_id")
-//    private User update_author;
-//
-//    public User getUpdate_author() {
-//        return update_author;
-//    }
-//
-//    public void setUpdate_author(User update_author) {
-//        this.update_author = update_author;
-//    }
 
-    public Post() {
-
-    }
-
-
-    public Post(String title, String anons, String full_text, String create_date, User author) {
-        this.title = title;
-        this.anons = anons;
-        this.full_text = full_text;
-        this.create_date = create_date;
-        this.author = author;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;

@@ -25,7 +25,7 @@ public class SaveUserController {
         // в случае ошибок принимает false и в модель добавляются сообщения об ошибках
         boolean correctData = true;
         // в форме есть поле new_password (ввод нового пароля) и поля старого пароля пустое (значит пользователь решил его не менять)
-        if (form.containsKey("new_password") && !form.get("password").isEmpty() && !checkPassword(form.get("password"), user.getPassword())) {
+        if (!form.get("password").isEmpty() && form.containsKey("new_password") &&  !checkPassword(form.get("password"), user.getPassword())) {
             model.addAttribute("password_error", "Старый пароль введен неверно, пожалуйста проверьте его корректность");
             correctData = false;
         }
@@ -50,17 +50,23 @@ public class SaveUserController {
         return correctData;
     }
 
-    public static User setData(Map<String, String> form) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
+    public static User setData(Map<String, String> form, User user) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        User user = (User) authentication.getPrincipal();
 
         user.setFirstname(form.get("firstname"));
         user.setLastname(form.get("lastname"));
         user.setPatronymic(form.get("patronymic"));
         user.setEmail(form.get("email"));
-        //поле не пустое, если уставновлен новый пароль
-        if (!form.get("password").equals("")) {
-            user.setPassword(new BCryptPasswordEncoder().encode(form.get("password")));
+        //поле password не пустое, если уставновлен новый пароль в new_password
+        //если true-пароль от обычного пользователя
+        //иначе пароль поставил админ
+        if (!form.get("password").equals("") && form.containsKey("new_password")) {
+            user.setPassword(new BCryptPasswordEncoder().encode(form.get("new_password")));
+        }else {
+            if (!form.get("password").equals("")){
+                user.setPassword(new BCryptPasswordEncoder().encode(form.get("password")));
+            }
         }
 
         return user;

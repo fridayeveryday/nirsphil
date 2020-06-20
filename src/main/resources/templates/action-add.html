@@ -12,39 +12,42 @@
 <header th:insert="parts/summernote :: summernote"></header>
 
 <header th:insert="parts/navbar :: navbar"></header>
-<form th:action="'/news-add'" method="post">
+<form th:action="'/action-add'" method="post">
     <div class="container mt-5 mb-5">
         <div class="container mt-5 mb-5">
             <div class="mx-auto" >
 
                 <div class="form-group">
-                    <div class="my-4"> <h4> <strong> Добавление статьи</strong></h4> </div>
+                    <div class="my-4"> <h4> <strong> Добавление мероприятия</strong></h4> </div>
                     <div class="col-lg-8">
 
-                        <input type="text" name="title" placeholder="Введите название статьи" class="form-control">
+                        <input type="text" name="title" placeholder="Введите название мероприятия" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-lg-8">
-                        <input type="text" name="anons" placeholder="Введите анонс статьи" class="form-control">
+                        <input type="text" name="anons" placeholder="Введите анонс мероприятия" class="form-control">
                     </div>
                 </div>
-
+                <div id="editor"></div>
                 <div class="form-group">
+
                     <!--Вставка шаблона редактора-->
                     <div th:insert="parts/summernote::summernote_editor">
                     </div>
 
-                </div>
+
                 <div class="col-lg-8">
 
-                    <button type="submit" class="btn btn-success" >Добавить статью</button>
+                    <button type="submit" class="btn btn-success" >Добавить мероприятие</button>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
             </div>
         </div>
+        </div>
     </div>
 </form>
+
 
 </body>
 </html>

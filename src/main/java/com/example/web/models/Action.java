@@ -3,9 +3,11 @@ package com.example.web.models;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 //@Proxy(lazy = false)
 @Entity
-public class Post {
+public class Action {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -14,6 +16,9 @@ public class Post {
     @Lob
     private String full_text;
     private int vievs;
+
+    @ElementCollection
+    private List<Long> list_id = new ArrayList<Long>();
     private String create_date;
     private String update_date;
 
@@ -21,34 +26,29 @@ public class Post {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-//    private long user_id;
+    //private long user_id;
     private User author;
 
-
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "update_user_id")
-//    private User update_author;
-//
-//    public User getUpdate_author() {
-//        return update_author;
-//    }
-//
-//    public void setUpdate_author(User update_author) {
-//        this.update_author = update_author;
-//    }
-
-    public Post() {
+    public Action(){
 
     }
 
-
-    public Post(String title, String anons, String full_text, String create_date, User author) {
+    public Action(String title, String anons, String full_text, String create_date, User author, ArrayList<Long> list_id) {
         this.title = title;
         this.anons = anons;
         this.full_text = full_text;
         this.create_date = create_date;
         this.author = author;
+        this.list_id = list_id;
+    }
+
+
+    public List<Long> getList_id() {
+        return list_id;
+    }
+
+    public void setList_id(List<Long> list_id) {
+        this.list_id = list_id;
     }
 
     public Long getId() {
@@ -92,13 +92,6 @@ public class Post {
     }
 
 
-    public String getUpdate_date() {
-        return update_date;
-    }
-
-    public void setUpdate_date(String update_date) {
-        this.update_date = update_date;
-    }
 
     public String getCreate_date() {
         return create_date;
@@ -107,6 +100,15 @@ public class Post {
     public void setCreate_date(String create_date) {
         this.create_date = create_date;
     }
+
+    public String getUpdate_date() {
+        return update_date;
+    }
+
+    public void setUpdate_date(String update_date) {
+        this.update_date = update_date;
+    }
+
     public User getAuthor() {
         return author;
     }
@@ -114,4 +116,6 @@ public class Post {
     public void setAuthor(User author) {
         this.author = author;
     }
+
+
 }
