@@ -16,7 +16,6 @@ public class Action {
     @Lob
     private String full_text;
     private int vievs;
-
     @ElementCollection
     private List<Long> list_id = new ArrayList<Long>();
     private String create_date;
@@ -33,9 +32,10 @@ public class Action {
 
     }
 
-    public Action(String title, String anons, String full_text, String create_date, User author, ArrayList<Long> list_id) {
+    public Action(String title, String anons, String full_text,int vievs, String create_date, User author, ArrayList<Long> list_id) {
         this.title = title;
         this.anons = anons;
+        this.vievs = vievs;
         this.full_text = full_text;
         this.create_date = create_date;
         this.author = author;

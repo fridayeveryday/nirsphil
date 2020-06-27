@@ -15,6 +15,7 @@
         <h1 th:text="${el.title}"></h1><br>
         <!--        <p th:text="${el.full_text}"></p><br>-->
         <div th:utext="${el.full_text}"></div>
+        <div th:text="'кол-во участников: ' +${el.vievs}"></div>
         <div id="clear_data"></div>
         <span th:text="${el.create_date} ? 'Дата создания:' + ${el.create_date} : '' "> </span>
         <span th:text="${el.update_date} ? 'Дата обновления:' + ${el.update_date} : ''"> </span>
