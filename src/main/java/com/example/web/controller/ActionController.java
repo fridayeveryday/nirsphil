@@ -175,16 +175,20 @@ public class ActionController {
         Action action = actionRepo.findById(id).orElseThrow(IllegalStateException::new);
         Long id_user = user.getId();
         User user1 = userRepo.findById(id_user).orElseThrow(IllegalStateException::new);
-
+        int vievs = action.getVievs();
         boolean chek = action.getList_id().contains(id_user);
         if(chek){
             user1.getList_action_id().remove(id);
+            vievs--;
+            action.setVievs(vievs);
             userRepo.save(user1);
             action.getList_id().remove(id_user);
             actionRepo.save(action);
 
         }
         else {
+            vievs++;
+            action.setVievs(vievs);
             user1.getList_action_id().add(id);
             userRepo.save(user1);
             action.getList_id().add(id_user);
@@ -204,6 +208,7 @@ public class ActionController {
             @RequestParam String raw_data,
             @RequestParam long date,
             Model model) {
+        int vievs = 0;
         System.out.println(author.getUsername());
         String date_of_create = DateOfPostConfig.getDate(date);
         // to store as html
@@ -212,6 +217,7 @@ public class ActionController {
         Action action = new Action(title,
                 anons,
                 full_text,
+                vievs,
                 date_of_create,
                 author,
                 (ArrayList<Long>) list_id
