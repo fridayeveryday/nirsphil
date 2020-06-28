@@ -8,6 +8,17 @@
 <body >
 <header th:insert="parts/navbar :: navbar"></header>
 
+
+<div>
+    Найти пользователей
+    <form th:action="'/filter'" method="post">
+        имя
+        <input name="firstname">
+        фамилия
+        <input name="lastname">
+        <button type="submit"> Найти</button>
+    </form>
+</div>
 <div class="container mt-5">
     <table>
         <thead><tr> <th>Имя</th> <th>Роль</th> <th></th> </tr>  </thead>
