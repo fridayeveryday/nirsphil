@@ -1,17 +1,30 @@
 <div th:fragment="user_account_open_data">
-    <span>Имя</span>
-    <input type="text" th:value="${user}?${user.firstname}:''" name="firstname">
+    <div class="container">
+        <div class="row">
+ <div class="text-input">
+     <input type="text"  th:value="${user}?${user.firstname}:''" name="firstname" class="input-field">
+     <span class="input-label">Имя</span>
+ </div>
 
-    <span>Фамилия</span>
-    <input type="text" th:value="${user}?${user.lastname}:'' " name="lastname">
+    <div class="text-input">
+  <input type="text" th:value="${user}?${user.lastname}:'' " name="lastname" class="input-field">
+        <span class="input-label">Фамилия</span>
+    </div>
 
-    <span>Отчество</span>
-    <input type="text" th:value="${user}?${user.patronymic}:''" name="patronymic">
+    <div class="text-input">
+  <input type="text" th:value="${user}?${user.patronymic}:''" name="patronymic" class="input-field">
+        <span class="input-label">Отчество</span>
+    </div>
 
     <!--/* span error для ошибок типа пустая графа почта или уже существующая почта*/-->
-    <span>email</span><span id="error" th:text="${error} ? ${error}:''"></span>
-    <input type="text" th:value="${user}?${user.email}:''" name="email">
+    <div class="text-input">
+    <span id="error" th:text="${error} ? ${error}:''"></span>
+    <input type="text" th:value="${user}?${user.email}:''" name="email" class="input-field">
+        <span class="input-label">Почта</span>
+    </div>
 </div>
+
+    </div></div>
 
 
 <div th:fragment="single_password_input">
@@ -19,6 +32,8 @@
     <!--    сделать кнопку-глазик для сокрытия пароля-->
     <input type="text" name="password">
 </div>
+
+
 
 <div th:fragment="new_password_input">
 

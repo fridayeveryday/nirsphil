@@ -10,7 +10,7 @@
 
 </div>
 
-<div th:fragment="summernote_editor">
+<div  th:fragment="summernote_editor">
     <div id="editor"></div>
     <input type="hidden" name="raw_data" id="raw_data" th:value="${el} ? ${el.full_text}:''">
     <input name="date" id="date" type="hidden">
@@ -21,7 +21,7 @@
                      button_id - id кнопки переключения режима редкатирования/предпросмотра,
                      e,p - class кнопки переключения режима редкатирования/предпросмотра соотвественно для задания css стиля кнопок через классы
                     */-->
-    <input type="button" id="button_id" class="e" onclick="en_dis_able_editor('editor', 'raw_data', 'button_id', 'e', 'p')" value="Редактировать">
+    <input type="button" id="button_id" class="butt-edit" onclick="en_dis_able_editor('editor', 'raw_data', 'button_id', 'butt-egit', 'butt-see')" value="Редактировать">
     <!--/*Подключение скрипта и вызов редактора при закгрзке страницы*/-->
     <script type="text/javascript" th:src="@{/js/editor_switcher.js}"></script>
     <script type="text/javascript">

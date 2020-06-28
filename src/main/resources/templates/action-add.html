@@ -13,37 +13,31 @@
 
 <header th:insert="parts/navbar :: navbar"></header>
 <form th:action="'/action-add'" method="post">
-    <div class="container mt-5 mb-5">
-        <div class="container mt-5 mb-5">
-            <div class="mx-auto" >
-
+     <div class="container">
+         <div class="add-frame">
+             <div class="form-text">
                 <div class="form-group">
-                    <div class="my-4"> <h4> <strong> Добавление мероприятия</strong></h4> </div>
-                    <div class="col-lg-8">
-
+                    <h3> <strong> Добавление мероприятия</strong></h3>
+                    <div class="col">
                         <input type="text" name="title" placeholder="Введите название мероприятия" class="form-control">
                     </div>
                 </div>
+
                 <div class="form-group">
-                    <div class="col-lg-8">
+                    <div class="col">
                         <input type="text" name="anons" placeholder="Введите анонс мероприятия" class="form-control">
                     </div>
                 </div>
+
                 <div id="editor"></div>
                 <div class="form-group">
-
-                    <!--Вставка шаблона редактора-->
-                    <div th:insert="parts/summernote::summernote_editor">
-                    </div>
-
-
-                <div class="col-lg-8">
-
-                    <button type="submit" class="btn btn-success" >Добавить мероприятие</button>
+                    <!--Вставка шаблона редактора--><div class="pad" th:insert="parts/summernote::summernote_editor"></div>
+                <div class="col-lg-8 text-right">
+                    <button type="submit" class="btn btn-success butt" >Добавить мероприятие</button>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
-            </div>
-        </div>
+                </div>
+             </div>
         </div>
     </div>
 </form>

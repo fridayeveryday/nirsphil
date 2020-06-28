@@ -14,35 +14,36 @@
 </div>
 <header th:insert="parts/navbar :: navbar"></header>
 
-    <div class="container mt-5">
+    <div class="container">
         <div class="col-lg-4 mt-2">
-            <div class="button"> <a href="/news/add"> <button class="btn btn-primary btn-lg " type="submit">Добавить статью</button></a></div>
-        </div>
-<!--        <h1 th:text="${title}"/>-->
-        <div th:each="el : ${#numbers.sequence(posts.size() - 1, 0, -1)}" class="alert alert-info mt-2">
-            <a th:href="'/news/' + ${posts[el].id}"><h1 th:text="${posts[el].title}"></h1><br></a>
-            <p th:text="${posts[el].anons}"></p><br>
+            <div class="button"> <a href="/news/add"> <button class="btn btn-primary btn-lg butt " type="submit">Добавить статью</button></a></div>
 
-                <div class="row mx-md-n5">
 
-                    <div class="col md-5" >
-                        <div class="text-left" >
-                        <span><strong th:text="${posts[el].author} ? 'Автор: ' +  ${posts[el].author.getUsername()} : 'nooooooooo'"></strong></span>
-                        <!--   <br><span th:text="${posts[el].create_date} ? 'Дата создания:' + ${posts[el].create_date} : '' "> </span> -->
-                        <div class="mr-1">    <span th:text="${posts[el].update_date} ? '' + ${posts[el].update_date} : ''"> </span></div>
+    <!--        <h1 th:text="${title}"/>-->
+                <div th:each="el : ${#numbers.sequence(posts.size() - 1, 0, -1)}" class=" alert alert-info mt-2 news-field">
+                <a th:href="'/news/' + ${posts[el].id}"><h1 th:text="${posts[el].title}"></h1><br></a>
+                <p th:text="${posts[el].anons}"></p><br>
+
+                    <div class="row">
+
+                        <div class="col" >
+                            <div class="text-left" >
+                            <span><strong th:text="${posts[el].author} ? 'Автор: ' +  ${posts[el].author.getUsername()} : 'nooooooooo'"></strong></span>
+                            <!--   <br><span th:text="${posts[el].create_date} ? 'Дата создания:' + ${posts[el].create_date} : '' "> </span> -->
+                            <div class="mr-1">    <span th:text="${posts[el].update_date} ? '' + ${posts[el].update_date} : ''"> </span></div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col md-5 mt-3.5">
-                        <div class="text-right" >
-                            <a th:href="'/news/' + ${posts[el].id}" class="btn btn-primary">Подробнее</a>
+                        <div class="col md-5 mr-3">
+                            <div class="text-right" >
+                                <a th:href="'/news/' + ${posts[el].id}" class="btn btn-primary">Подробнее</a>
+                            </div>
                         </div>
-                    </div>
-                    <!-- <span> <strong th:text="${posts[el].author} ? 'обновил' +${posts[el].author.getUsername()} : 'nooooooooo'"></strong></span>-->
-                    </div>
+                        <!-- <span> <strong th:text="${posts[el].author} ? 'обновил' +${posts[el].author.getUsername()} : 'nooooooooo'"></strong></span>-->
+                        </div>
 
-        </div>
 
-       </div>
+
+    </div>
    </body>
    </html>

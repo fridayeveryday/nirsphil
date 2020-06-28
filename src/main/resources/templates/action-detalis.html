@@ -9,6 +9,7 @@
 </head>
 <body >
 <header th:insert="parts/navbar :: navbar"></header>
+
 <div class="container mt-5 mb-5">
 
     <div th:each="el : ${action}" class="alert alert-info mt-2">
@@ -27,30 +28,30 @@
             <!--<div sec:authorize="hasAuthority('ADMIN')"> Внутри этого div видно только админам   -->
 
             <form th:action="'/action/' + ${el.id} + '/reg'" method="post">
-                <div th:if="${!chek}" class="form-group col-md-2">
-                    <button class="btn btn-danger" type="submit">Зарегестрироваться</button>
+                <div th:if="${!chek}" class="form-group col-md-3">
+                    <button class="btn butt" type="submit">Зарегистрироваться</button>
                 </div>
-                <div th:if="${chek}" class="form-group col-md-2">
-                    <button class="btn btn-danger" type="submit">Отменить регестрацию</button>
+                <div th:if="${chek}" class="form-group col-md-3">
+                    <button class="btn btn-danger butt " type="submit">Отменить регистрацию</button>
                 </div>
             </form>
 
             <form th:action="'/action/' + ${el.id} + '/action-users'" method="post">
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <button class="btn btn-danger" type="submit">Список участников</button>
                 </div>
 
             </form>
 
             <div sec:authorize="hasAuthority('ADMIN')">
-                <div class="form-group col-mb-2">
+                <div class="row"><div class="text-right" >
                     <a th:href="'/action/' + ${el.id} + '/edit'" class="btn btn-info">Редактировать</a><br><br>
                 </div>
                 <form th:action="'/action/' + ${el.id} + '/remove'" method="post">
                     <div class="form-group col-md-2">
                         <button class="btn btn-danger" type="submit">Удалить</button>
                     </div>
-                </form>
+                </form></div>
             </div>
         </div>
     </div>

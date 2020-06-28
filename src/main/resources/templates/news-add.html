@@ -13,28 +13,27 @@
 
 <header th:insert="parts/navbar :: navbar"></header>
 <form th:action="'/news-add'" method="post">
-    <div class="container mt-5 mb-5">
-        <div class="container mt-5 mb-5">
-            <div class="mx-auto" >
+    <div class="container">
+        <div class="add-frame">
+            <div class="form-text">
 
                 <div class="form-group">
-                    <div class="my-4"> <h4> <strong> Добавление статьи</strong></h4> </div>
-                    <div class="col-lg-8">
-
+                    <div class="mb-4">  <h3> <strong> Добавление статьи</strong></h3></div>
+                    <div class="col">
                         <input type="text" name="title" placeholder="Введите название статьи" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-lg-8">
+                    <div class="col">
                         <input type="text" name="anons" placeholder="Введите анонс статьи" class="form-control">
                     </div>
                 </div>
 
                 <div class="form-group">
+                    <div class="col">
                     <!--Вставка шаблона редактора-->
-                    <div th:insert="parts/summernote::summernote_editor">
+                    <div th:insert="parts/summernote::summernote_editor"></div>
                     </div>
-
                 </div>
                 <div class="col-lg-8">
 
@@ -42,6 +41,7 @@
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
             </div>
+        </div>
         </div>
     </div>
 </form>

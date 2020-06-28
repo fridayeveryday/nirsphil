@@ -14,16 +14,30 @@
 </div>
 <header th:insert="parts/navbar :: navbar"></header>
 
-<div class="container mt-5">
-    <div class="col-lg-4 mt-2">
-        <div class="button"> <a href="/action-add"> <button class="btn btn-primary btn-lg " type="submit">Добавить мероприятие</button></a></div>
+</div>
+
+<div class="container ">
+    <div class="row">
+    <div class="col-lg-3 mr-15">
+         <a href="/action-add"> <button class="btn btn-primary btn-lg butt " type="submit">Добавить мероприятие</button></a>
+    </div>
+
+    <div class="col-lg-3 ml-5 ">
+        <a th:href="'/user-actions'"> <button class="btn btn-primary btn-lg butt " type="submit">Мои мероприятия</button></a>
+    </div>
     </div>
     <!--        <h1 th:text="${title}"/>-->
-    <div th:each="el : ${#numbers.sequence(actions.size() - 1, 0, -1)}" class="alert alert-info mt-2">
-        <a th:href="'/action/' + ${actions[el].id}"><h1 th:text="${actions[el].title}"></h1><br></a>
-        <p th:text="${actions[el].anons}"></p><br>
+    <div th:each="el : ${#numbers.sequence(actions.size() - 1, 0, -1)}" class="alert alert-info mt-2 event-field">
+        <div class="row">
+            <div class="col-lg-3 event-text">
+            <p> <img class = "event-img" src=""/></p>
+            </div>
+            <div class="col-lg">
+            <a th:href="'/action/' + ${actions[el].id}"><h1 th:text="${actions[el].title}"></h1><br></a>
+            <p th:text="${actions[el].anons}"></p><br>
 
-        <div class="row mx-md-n5">
+
+        <div class="row mx-md-n5 ">
 
             <div class="col md-5" >
                 <div class="text-left" >
@@ -40,7 +54,8 @@
             </div>
             <!-- <span> <strong th:text="${posts[el].author} ? 'обновил' +${posts[el].author.getUsername()} : 'nooooooooo'"></strong></span>-->
         </div>
-
+            </div>
+        </div>
     </div>
 
 </div>
