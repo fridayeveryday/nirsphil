@@ -33,8 +33,9 @@ public class Action {
 
     }
 
-    public Action(String title, String anons, String full_text, String create_date, User author, ArrayList<Long> list_id) {
+    public Action(String title, String anons, String full_text,int vievs, String create_date, User author, ArrayList<Long> list_id) {
         this.title = title;
+        this.vievs = vievs;
         this.anons = anons;
         this.full_text = full_text;
         this.create_date = create_date;
