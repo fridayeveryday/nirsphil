@@ -6,41 +6,43 @@
 
     <title>nirsfill</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link th:href="@{/css/style.css}" rel="stylesheet"   >
+    <link th:href="@{/css/style.css}" rel="stylesheet" >
 </head>
 <body >
 <header th:insert="parts/summernote :: summernote"></header>
 
 <header th:insert="parts/navbar :: navbar"></header>
 <form th:action="'/news-add'" method="post">
-    <div class="container mt-5 mb-5">
-        <div class="container mt-5 mb-5">
-            <div class="mx-auto" >
+    <div class="container">
+        <div class="add-frame">
+            <div class="form-text2">
 
                 <div class="form-group">
                     <div class="my-4"> <h4> <strong> Добавление статьи</strong></h4> </div>
-                    <div class="col-lg-8">
+
 
                         <input type="text" name="title" placeholder="Введите название статьи" class="form-control">
-                    </div>
+
                 </div>
                 <div class="form-group">
-                    <div class="col-lg-8">
+
                         <input type="text" name="anons" placeholder="Введите анонс статьи" class="form-control">
-                    </div>
+
                 </div>
 
                 <div class="form-group">
                     <!--Вставка шаблона редактора-->
-                    <div th:insert="parts/summernote::summernote_editor">
-                    </div>
-                    Отметить важным<input type="checkbox" name="importance" th:checked="${el} ? ${el.importance}:''">
+                    <div th:insert="parts/summernote::summernote_editor"></div>
                 </div>
-                <div class="col-lg-8">
 
-                    <button type="submit" class="btn btn-success" >Добавить статью</button>
+                <div class="row add-row">
+                    <span class="mr-3 mt-2 align-middle" >  Отметить важным  <input type="checkbox" name="importance" th:checked="${el} ? ${el.importance}:''"></span>
+                <div class="text-right">
+
+                    <button type="submit" class="btn butt-add" >Добавить статью</button>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                </div>
             </div>
         </div>
     </div>

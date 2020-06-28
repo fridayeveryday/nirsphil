@@ -15,7 +15,8 @@
 <form th:action="'/registration'" method="post">
     <div id="error" th:text="${message} ? ${message}: ''"></div>
     <div class="container mt-5 mb-5 ">
-        <div class="mx-auto">
+        <div class="form-bg">
+            <div class="form-text">
             <div class="form-group row justify-content-md-center">
                 <div class="mt-4"><h4><strong>Регистрация </strong></h4></div>
             </div>
@@ -71,6 +72,7 @@
             <div class="form-group row justify-content-md-center">
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                 <p> Уже есть аккаунт? <a href="/login">Войти</a></p>
+            </div>
             </div>
         </div>
     </div>

@@ -11,23 +11,25 @@
 <header th:insert="parts/navbar :: navbar"></header>
 <div class="container mt-5 mb-5">
 
-        <div th:each="el : ${post}" class="alert alert-info mt-2">
+        <div th:each="el : ${post}" class="alert alert-info mt-2 frame-big">
         <h1 th:text="${el.title}"></h1><br>
 <!--        <p th:text="${el.full_text}"></p><br>-->
         <div th:utext="${el.full_text}"></div>
-        <div id="clear_data"></div>
-        <span th:text="${el.create_date} ? 'Дата создания:' + ${el.create_date} : '' "> </span>
-        <span th:text="${el.update_date} ? 'Дата обновления:' + ${el.update_date} : ''"> </span>
-        автор <strong th:text="${el.author} ? ${el.author.getUsername()} : 'nooooooooo'"></strong>
+        <div class=" mt-4" id="clear_data"></div>
+        <span th:text="${el.create_date} ? 'Дата создания: ' + ${el.create_date} : '' "> </span>
+        <span th:text="${el.update_date} ? 'Дата обновления: ' + ${el.update_date} : ''"> </span><br>
+        Автор: <strong th:text="${el.author} ? ${el.author.getUsername()} : 'nooooooooo'"></strong>
 
 
 
 
-            <div class="form-row">
+            <div class="form-row text-right">
                 <!--<div sec:authorize="hasAuthority('ADMIN')"> Внутри этого div видно только админам   -->
 
 
-                <div sec:authorize="hasAuthority('ADMIN')">
+                <div class="row ml-2" sec:authorize="hasAuthority('ADMIN')">
+
+
                     <div class="form-group col-mb-2">
                         <a th:href="'/news/' + ${el.id} + '/edit'" class="btn btn-info">Редактировать</a><br><br>
                     </div>
@@ -36,6 +38,7 @@
                             <button class="btn btn-danger" type="submit">Удалить</button>
                         </div>
                     </form>
+                </div>
                 </div>
             </div>
         </div>

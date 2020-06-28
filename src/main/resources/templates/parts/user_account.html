@@ -1,36 +1,50 @@
 <div th:fragment="user_account_open_data">
-    <span>Имя</span>
-    <input type="text" th:value="${user}?${user.firstname}:''" name="firstname">
+    <div class="container">
+        <div class="row">
+            <div class="text-input">
+                <input type="text" class="input-field" th:value="${user}?${user.firstname}:''" name="firstname"> <span class="input-label"> Имя</span>
+            </div>
 
-    <span>Фамилия</span>
-    <input type="text" th:value="${user}?${user.lastname}:'' " name="lastname">
+            <div class="text-input">
+                <input type="text"  class="input-field" th:value="${user}?${user.lastname}:'' " name="lastname"> <span class="input-label">Фамилия</span>
+            </div>
 
-    <span>Отчество</span>
-    <input type="text" th:value="${user}?${user.patronymic}:''" name="patronymic">
+            <div class="text-input">
+                <input type="text" class="input-field" th:value="${user}?${user.patronymic}:''" name="patronymic">  <span class="input-label">Отчество</span>
+            </div>
 
     <!--/* span error для ошибок типа пустая графа почта или уже существующая почта*/-->
-    <span>email</span><span id="error" th:text="${error} ? ${error}:''"></span>
-    <input type="text" th:value="${user}?${user.email}:''" name="email">
+            <div class="text-input">
+                <input type="text" class="input-field" th:value="${user}?${user.email}:''" name="email">
+                <span class="input-label" >E-mail </span><span id="error" th:text="${error} ? ${error}:''"></span>
+            </div>
+        </div>
+    </div>
 </div>
-
 
 <div th:fragment="single_password_input">
-    <span>Пароль</span>
+    <div class="text-input">
     <!--    сделать кнопку-глазик для сокрытия пароля-->
-    <input type="text" name="password">
+    <input type="text" class="input-field" name="password">  <span class="input-label">Пароль</span>
+    </div>
 </div>
 
+
 <div th:fragment="new_password_input">
+    <div class="container">
+        <div class="row">
+            <div class="text-input">
+                <!--    сделать кнопку-глазик для сокрытия пароля-->
+                <input  class="input-field" id="new_password_id" type="text" name="new_password"> <span class="input-label">Ваш новый пароль</span>
+            </div>
 
-    <span>Ваш новый пароль</span>
-    <!--    сделать кнопку-глазик для сокрытия пароля-->
-    <input id="new_password_id" type="text" name="new_password">
-
-    <span>Повторите новый пароль</span>
-    <!--    сделать кнопку-глазик для сокрытия пароля-->
-    <input id="new_password2_id" type="text" name="new_password2">
-    <span id="mismatched_pass_error_id"></span>
-
+            <div class="text-input">
+                <!--    сделать кнопку-глазик для сокрытия пароля-->
+                <input  class="input-field"  id="new_password2_id" type="text" name="new_password2"> <span class="input-label">Повторите новый пароль</span>
+                <span id="mismatched_pass_error_id"></span>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -39,11 +53,11 @@
 
     <span id="error" th:text="${password_error} ? ${password_error}:''"></span>
 <!--    для личного кабинета-->
-
+    <div class="text-input">
         <span id="empty_error_id"></span>
-        <span>Ваш старый пароль</span>
         <!--    сделать кнопку-глазик для сокрытия пароля-->
-        <input id="old_password_id" type="text" name="password">
+        <input class="input-field" id="old_password_id" type="text" name="password"> <span class="input-label">Ваш старый пароль</span>
+    </div>
         <div th:insert="parts/user_account::new_password_input"></div>
 
 </div>

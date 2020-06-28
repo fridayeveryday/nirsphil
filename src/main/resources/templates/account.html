@@ -10,29 +10,48 @@
 </head>
 <body>
 <header th:insert="parts/navbar :: navbar"></header>
-<form method="post" th:action="'/user'">
-    <div th:insert="parts/user_account::user_account_open_data"></div>
-    <div id="password_div" th:insert="parts/user_account::password_inputs4account"></div>
+
+<div class="container">
+    <h1>Личный кабинет</h1>
+    <div class="form-bg">
+        <div class="form-text">
+        <form method="post" th:action="'/user'">
+            <h3>Личная информация</h3>
+            <div th:insert="parts/user_account::user_account_open_data"></div><br>
+            <h3>Смена пароля</h3>
+            <div id="password_div" th:insert="parts/user_account::password_inputs4account"></div>
 
 
-    <input class="form-control" type="hidden" th:value="${user.id}" name="userId">
-    <input class="form-control" type="hidden" name="_csrf" value="${_csrf.token}"/>
-    <button class="btn btn-primary btn-lg enable_btn_class" type="submit" id="submit_button_id"> Сохранить данные
-    </button>
+            <input class="form-control" type="hidden" th:value="${user.id}" name="userId">
+            <input class="form-control" type="hidden" name="_csrf" value="${_csrf.token}"/>
+            <button class="btn btn-primary btn-lg enable_btn_class butt-ml" type="submit" id="submit_button_id "> Сохранить данные</button><br><br>
+        </form>
+        </div>
+    </div>
 
-</form>
-<div id="change_password_id"> Изменить пароль</div>
-<!--<a th:href="'change-password/' + ${user.id}"> Изменить Пароль</a>-->
-<div sec:authorize="isAuthenticated()">
-    <!--при релизе вставить это-->
-    <!--    <div class="container mt-5" sec:authorize="hasAuthority('ADMIN')">-->
-    <a th:href="'/user'">
-        <button class="btn btn-primary btn-lg " type="submit"> Список пользователей</button>
-    </a>
+    <div class="form-bg">
+        <div class="form-text">
+        <div id="change_password_id"> </div>
+    <!--<a th:href="'change-password/' + ${user.id}"> Изменить Пароль</a>-->
+        <div sec:authorize="isAuthenticated()">
+            <h3>Настройки администратора</h3>
+            <div class="container">
+                <div class="row">
+            <!--при релизе вставить это-->
+            <!--    <div class="container mt-5" sec:authorize="hasAuthority('ADMIN')">-->
+            <a th:href="'/user'">
+                <button class="btn btn-primary btn-lg butt-ml " type="submit"> Список пользователей</button>
+            </a>
 
-    <a th:href="'/user-actions'">
-        <button class="btn btn-primary btn-lg " type="submit"> Список Мероприятий</button>
-    </a>
+            <a th:href="'/user-actions'">
+                <button class="btn btn-primary btn-lg butt-ml " type="submit"> Список Мероприятий</button>
+            </a>
+                </div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>
 <script type="text/javascript" th:src="@{/js/password_checker.js}"></script>
 <script type="text/javascript">
