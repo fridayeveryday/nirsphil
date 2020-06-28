@@ -1,6 +1,7 @@
 package com.example.web.models;
 
 import org.hibernate.annotations.Proxy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 //@Proxy(lazy = false)
@@ -11,11 +12,12 @@ public class Post {
     private Long id;
     private String title;
     private String anons;
-    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     private String full_text;
     private int vievs;
     private String create_date;
     private String update_date;
+    private boolean importance;
 
 
 
@@ -43,12 +45,13 @@ public class Post {
     }
 
 
-    public Post(String title, String anons, String full_text, String create_date, User author) {
+    public Post(String title, String anons, String full_text, String create_date, User author, boolean importance) {
         this.title = title;
         this.anons = anons;
         this.full_text = full_text;
         this.create_date = create_date;
         this.author = author;
+        this.importance = importance;
     }
 
     public Long getId() {
@@ -113,5 +116,13 @@ public class Post {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public boolean isImportance() {
+        return importance;
+    }
+
+    public void setImportance(boolean importance) {
+        this.importance = importance;
     }
 }
