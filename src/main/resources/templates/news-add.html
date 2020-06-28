@@ -34,7 +34,7 @@
                     <!--Вставка шаблона редактора-->
                     <div th:insert="parts/summernote::summernote_editor">
                     </div>
-
+                    Отметить важным<input type="checkbox" name="importance" th:checked="${el} ? ${el.importance}:''">
                 </div>
                 <div class="col-lg-8">
 
