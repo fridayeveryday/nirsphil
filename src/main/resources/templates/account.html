@@ -13,11 +13,32 @@
 
 <div class="container">
     <h1>Личный кабинет</h1>
+
+    <ul>
+        <div class="nav"><div class="top">
+            <li class="nav-item">
+                <a class="nav-link active" href="/account">Личные данные</a>
+            </li>
+            <li class="nav-item">
+                <p>    <a class="nav-link" href="#passw">Смена пароля</a></p>
+            </li>
+            <li class="nav-item">
+                <p>  <a class="nav-link" href="#for-admin">Настройки администратора</a></p>
+            </li>
+            <!-- <li class="nav-item">
+            <a class="nav-link" th:href="'/user-actions'"> Мои мероприятия </a>
+            </li>-->
+        </div>
+
+        </div>
+    </ul>
+    <hr class="m-b" size=3px width=1110px align="left" color="#A6ACBE">
     <div class="form-bg">
         <div class="form-text">
         <form method="post" th:action="'/user'">
             <h3>Личная информация</h3>
             <div th:insert="parts/user_account::user_account_open_data"></div><br>
+            <p><a name="passw"></a></p>
             <h3>Смена пароля</h3>
             <div id="password_div" th:insert="parts/user_account::password_inputs4account"></div>
 
@@ -28,7 +49,7 @@
         </form>
         </div>
     </div>
-
+    <p><a name="for-admin"></a></p>
     <div class="form-bg">
         <div class="form-text">
         <div id="change_password_id"> </div>

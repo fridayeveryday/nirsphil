@@ -17,7 +17,7 @@
 <div class="container mt-5">
    
     <!--        <h1 th:text="${title}"/>-->
-    <div th:each="el : ${#numbers.sequence(actions.size() - 1, 0, -1)}" class="alert alert-info mt-2">
+    <div th:each="el : ${#numbers.sequence(actions.size() - 1, 0, -1)}" class="alert alert-info mt-2 news-field">
         <a th:href="'/action/' + ${actions[el].id}"><h1 th:text="${actions[el].title}"></h1><br></a>
         <p th:text="${actions[el].anons}"></p><br>
 
