@@ -278,3 +278,8 @@ margin-top: -85px;
 .m-t{
     margin-top: -105px;
 }
+
+a .main-menu:active{
+    color: #6A5FD0;
+    font-weight: 700;
+}
