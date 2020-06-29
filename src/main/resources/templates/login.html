@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
+<!--    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>-->
+<!--    <script type="text/javascript" th:src="@{/js/passwd_eye.js}"></script>&lt;!&ndash;    <link th:href="@{/css/password.css}" rel="stylesheet"   >&ndash;&gt;-->
     <title>Spring Security Example </title>
     <!-- Bootstrap CSS -->
     <header th:insert="parts/navbar :: navbar"></header>
@@ -19,9 +21,14 @@
                 </div>
             </div>
             <div class="form-group row justify-content-md-center">
+
                 <div class="col-lg-4">
-                    <input type="password" name="password" class="form-control" placeholder="Пароль" />
+                    <div class="password">
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Пароль" />
+<!--                        <div class="icon"><img class="icon" src="https://img.icons8.com/ios/50/000000/show-password.png"/></div>-->
+                    </div>
                 </div>
+
             </div>
 
             <div class="form-group row justify-content-md-center">
@@ -30,7 +37,7 @@
                 </div>
             </div>
             <div class="form-group row justify-content-md-center">
-                <p > Уже есть аккаунт? <a href="/registration">Регистрация</a> </p>
+                <p > Ещё нет аккаунта? <a href="/registration">Регистрация</a> </p>
             </div>
         </div>
     </div>
