@@ -7,21 +7,28 @@
 </head>
 <body >
 <header th:insert="parts/navbar :: navbar"></header>
-
+<div class="container mt-5">
+    <div class="form-bg-list">
+        <div class="form-text2">
 
 <div>
-    Найти пользователей
+    <h4> Найти пользователей</h4>
     <form th:action="'/filter'" method="post">
-        имя
-        <input name="firstname">
-        фамилия
-        <input name="lastname">
-        <button type="submit"> Найти</button>
+        <div class="row mt-3">
+        <div class="col-lg-5">
+        Имя:  <input name="firstname" class="form-control mt-2">
+        </div>
+        <div class="col-lg-5">
+        Фамилия: <input name="lastname" class="form-control mt-2">
+        </div>
+            <div class="col-sm-2 mt-4">
+                <button class="btn btn-info" type="submit"> Найти</button></div>
+        </div>
     </form>
 </div>
-<div class="container mt-5">
-    <table>
-        <thead><tr> <th>Имя</th> <th>Роль</th> <th></th> </tr>  </thead>
+
+    <table class="table mt-5">
+        <thead class="thead-light"><tr> <th>Имя</th> <th>Роль</th> <th></th> </tr>  </thead>
         <tbody>
 
                  <tr th:each="user : ${users}">
@@ -48,8 +55,10 @@
                           </tr>
                    </tbody> -->
                </table>
-           </div>
 
 
+        </div>
+    </div>
+</div>
            </body>
            </html>

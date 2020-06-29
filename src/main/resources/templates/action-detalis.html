@@ -11,15 +11,15 @@
 <header th:insert="parts/navbar :: navbar"></header>
 <div class="container mt-5 mb-5">
 
-    <div th:each="el : ${action}" class="alert alert-info mt-2">
+    <div th:each="el : ${action}" class="alert alert-info mt-2 frame-big">
         <h1 th:text="${el.title}"></h1><br>
         <!--        <p th:text="${el.full_text}"></p><br>-->
         <div th:utext="${el.full_text}"></div>
-        <div th:utext="'кол-во участников: ' + ${el.vievs}"></div>
+       <strong> <div th:utext="'Количество участников: ' + ${el.vievs}"></div></strong><br><br>
         <div id="clear_data"></div>
-        <span th:text="${el.create_date} ? 'Дата создания:' + ${el.create_date} : '' "> </span>
-        <span th:text="${el.update_date} ? 'Дата обновления:' + ${el.update_date} : ''"> </span>
-        автор <strong th:text="${el.author} ? ${el.author.getUsername()} : 'nooooooooo'"></strong>
+        <span th:text="${el.create_date} ? 'Дата создания: ' + ${el.create_date} : '' "> </span>
+        <span th:text="${el.update_date} ? 'Дата обновления: ' + ${el.update_date} : ''"> </span><br>
+        Автор: <strong th:text="${el.author} ? ${el.author.getUsername()} : 'nooooooooo'"></strong>
 
 
 
@@ -28,30 +28,29 @@
             <!--<div sec:authorize="hasAuthority('ADMIN')"> Внутри этого div видно только админам   -->
 
             <form th:action="'/action/' + ${el.id} + '/reg'" method="post">
-                <div th:if="${!chek}" class="form-group col-md-2">
-                    <button class="btn btn-danger" type="submit">Зарегестрироваться</button>
+                <div th:if="${!chek}" class="form-group">
+                    <button class="btn btn-info  mr-4" type="submit">Зарегистрироваться</button>
                 </div>
-                <div th:if="${chek}" class="form-group col-md-2">
-                    <button class="btn btn-danger" type="submit">Отменить регестрацию</button>
+                <div th:if="${chek}" class="form-group ">
+                    <button class="btn btn-danger  mr-4" type="submit">Отменить регистрацию</button>
                 </div>
             </form>
 
             <form th:action="'/action/' + ${el.id} + '/action-users'" method="post">
-                <div class="form-group col-md-2">
-                    <button class="btn btn-danger" type="submit">Список участников</button>
+                <div class="form-group ">
+                    <button class="btn btn-info mr-4" >Список участников</button>
                 </div>
 
             </form>
 
             <div sec:authorize="hasAuthority('ADMIN')">
-                <div class="form-group col-mb-2">
-                    <a th:href="'/action/' + ${el.id} + '/edit'" class="btn btn-info">Редактировать</a><br><br>
-                </div>
-                <form th:action="'/action/' + ${el.id} + '/remove'" method="post">
-                    <div class="form-group col-md-2">
-                        <button class="btn btn-danger" type="submit">Удалить</button>
-                    </div>
+                <div class="form-group row m-l ">
+                     <a th:href="'/action/' + ${el.id} + '/edit'" ><button class=" btn btn-primary mr-4" type="submit">Редактировать </button></a>
+
+                    <form th:action="'/action/' + ${el.id} + '/remove'" method="post">
+                        <button class="btn btn-danger mr-4" type="submit">Удалить</button>
                 </form>
+                </div>
             </div>
         </div>
     </div>

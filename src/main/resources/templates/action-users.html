@@ -9,18 +9,22 @@
 <header th:insert="parts/navbar :: navbar"></header>
 
 <div class="container mt-5">
-    <table>
-        <thead><tr> <th>Имя</th> <th>почта</th> <th></th> </tr>  </thead>
-        <tbody>
+    <div class="form-bg-list">
+        <div class="form-text2">
+            <table class="table">
+                <thead class="thead-light"><tr> <th>Имя</th> <th>почта</th> <th></th> </tr>  </thead>
+                <tbody>
 
-        <tr th:each="user : ${users}">
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.email}"></td>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.email}"></td>
 
-        </tr>
+                </tr>
 
 
-    </table>
+            </table>
+        </div>
+    </div>
 </div>
 
 

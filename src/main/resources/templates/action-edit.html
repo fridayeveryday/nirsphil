@@ -8,33 +8,33 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body >
-<header th:insert="parts/navbar :: navbar"></header>
-<header th:insert="parts/summernote :: summernote"></header>
 
+<header th:insert="parts/summernote :: summernote"></header>
+<header th:insert="parts/navbar :: navbar"></header>
 
 
 <div th:each="el : ${action}" >
     <form th:action="'/action/' + ${el.id} + '/edit'" method="post">
-        <div class="container mt-5 mb-5">
-            <div class="mx-auto" >
-                <div class="my-4"> <h4> <strong> Редактирование статьи </strong></h4></div>
+        <div class="container">
+            <div class="add-frame">
+                <div class="form-text2">
+                <div class="my-4"> <h4> <strong> Редактирование мероприятия </strong></h4></div>
                 <div class="form-group">
-                    <div class="col-lg-8">
+
                         <input type="text" th:value ="${el.title}" name="title" placeholder="" class="form-control"><br>
-                    </div>
-                    <div class="col-lg-8">
+
+
                         <input type="text"  th:value ="${el.anons}" name="anons"  placeholder="" class="form-control"><br>
-                    </div>
-                    <div class="col-lg-8">
+
+
                         <div id="editor"></div>
-                    </div>
+
                     <div class="form-group row">
                         <!--Вставка шаблона редактора-->
-                        <div th:insert="parts/summernote::summernote_editor">
-                        </div>
-                            <button type="submit" class="btn btn-success my-15 ">Обновить меропритие</button>
-                        </div>
+                        <div th:insert="parts/summernote::summernote_editor"></div>
+                        <div class="text-right"> <button type="submit" class="btn btn-primary butt-add m-l mt-3">Обновить меропритие</button></div>
                     </div>
+
                 </div>
             </div>
         </div>

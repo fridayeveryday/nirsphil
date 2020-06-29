@@ -8,18 +8,21 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" crossorigin="anonymous">
 
 </head>
-<body >
+<body>
 
 
 </div>
 <header th:insert="parts/navbar :: navbar"></header>
 
-<div class="container mt-5">
-    <div class="col-lg-4 mt-2">
-        <div class="button"> <a href="/action-add"> <button class="btn btn-primary btn-lg " type="submit">Добавить мероприятие</button></a></div>
+<div class="container">
+    <div class=" row">
+        <a href="/action-add">   <button class="btn btn-primary btn-lg butt mt-3 ml-3" type="submit">Добавить мероприятие</button></a>
+        <a th:href="'/user-actions'"> <button class="btn btn-primary btn-lg butt-ml mt-3 " type="submit"> Мои мероприятия</button></a>
     </div>
+
+
     <!--        <h1 th:text="${title}"/>-->
-    <div th:each="el : ${#numbers.sequence(actions.size() - 1, 0, -1)}" class="alert alert-info mt-2">
+    <div th:each="el : ${#numbers.sequence(actions.size() - 1, 0, -1)}" class="alert alert-info mt-2 news-field">
         <a th:href="'/action/' + ${actions[el].id}"><h1 th:text="${actions[el].title}"></h1><br></a>
         <p th:text="${actions[el].anons}"></p><br>
 

@@ -17,9 +17,11 @@ function check_passwords(password_div_id, old_password_id,
 
             if (
                 // если блок с паролями виден (в личном кабинете он будет появляться и скрываться по клику)
-                $('#' + password_div_id).is(":visible")
+                // $('#' + password_div_id).is(":visible")
                 // и все поля заполнены и новые пароли совпадают
-                && old_passwd && check_new_passwds(new_passwd, new_passwd2)
+                // &&
+                old_passwd && (new_passwd === new_passwd2) && new_passwd && new_passwd2
+                // check_new_passwds(new_passwd, new_passwd2)
             ) {
                 // тогда кнопка для сохранения данных активируется
                 submit_button.removeClass(disable_btn_class).addClass(enable_btn_class);
@@ -40,7 +42,6 @@ function check_passwords(password_div_id, old_password_id,
                     $('#' + mismatched_pass_error_id).text("Введенные пароли не совпадают");
                 } else {
                     $('#' + mismatched_pass_error_id).text("");
-
                 }
 
                 // кнопка деактивируется
