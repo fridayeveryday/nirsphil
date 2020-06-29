@@ -1,6 +1,7 @@
 function enable_editor(editor_id, hidden_input_id, button_id,edit_button_class, preview_button_class) {
 
     let raw_data = $('#' + hidden_input_id).val();
+    $('#' + editor_id).summernote({height: 500});
     $('#' + editor_id).summernote('code', raw_data);
     // $('#' + editor_id).summernote( {disableDragAndDrop: true});
     $(".note-editing-area").bind(

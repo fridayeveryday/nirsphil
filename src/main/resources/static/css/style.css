@@ -235,7 +235,8 @@ p .event-img{
 .add-frame{
 
     width: 960px;
-    height: 425px;
+    min-height: auto;
+    overflow:hidden ;
 
     background: #FFFFFF;
     box-shadow: 0px 4px 15px rgba(150, 156, 186, 0.15);
